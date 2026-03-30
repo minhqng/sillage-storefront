@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Linen in afternoon light</title>
+  <desc id="desc">Soft editorial scene with draped linen and pale sunlight.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f3eb" />
+      <stop offset="100%" stop-color="#dfd4c4" />
+    </linearGradient>
+    <linearGradient id="cloth" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffdf8" />
+      <stop offset="100%" stop-color="#eadfce" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)" />
+  <rect x="0" y="0" width="460" height="1200" fill="#fbf7f0" opacity="0.82" />
+  <circle cx="320" cy="220" r="170" fill="#f2e8db" opacity="0.9" />
+  <path d="M420 180c180 140 266 246 300 388 18 74 42 156 90 244 84 152 210 250 392 328H290c46-128 80-246 94-362 20-152 6-358 36-598z" fill="url(#cloth)" />
+  <path d="M596 316c98 94 150 176 176 262 24 82 42 174 92 266" fill="none" stroke="#d9c9b4" stroke-linecap="round" stroke-width="18" opacity="0.6" />
+  <path d="M474 430c76 80 124 164 148 260 22 92 28 186 60 292" fill="none" stroke="#e6d8c5" stroke-linecap="round" stroke-width="16" opacity="0.75" />
+  <text x="210" y="1080" fill="#7d6850" font-family="Georgia, serif" font-size="34" letter-spacing="7">SILLAGE LINEN LIGHT</text>
+</svg>

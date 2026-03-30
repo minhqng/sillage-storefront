@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Neroli Shade editorial study</title>
+  <desc id="desc">White floral citrus study with diffuse blossom light and pale tea tones.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4ecdf"/>
+      <stop offset="100%" stop-color="#b8a992"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="94" y="114" width="1012" height="572" rx="28" fill="#fffaf2" opacity=".36"/>
+  <circle cx="370" cy="320" r="114" fill="#fff7ec" opacity=".88"/>
+  <circle cx="470" cy="388" r="82" fill="#ece1cd" opacity=".72"/>
+  <rect x="610" y="210" width="166" height="326" rx="18" fill="#d2c3ae" opacity=".78"/>
+  <rect x="808" y="240" width="110" height="286" rx="18" fill="#8f836f" opacity=".62"/>
+  <path d="M270 534c118 0 212 10 282 30" stroke="#ded4c6" stroke-width="16" stroke-linecap="round" opacity=".48"/>
+</svg>

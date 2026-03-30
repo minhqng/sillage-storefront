@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Cedar Ink editorial study</title>
+  <desc id="desc">Smoked wood study with ink-dark paper, cedar block, and low warm light.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ddd0c7"/>
+      <stop offset="100%" stop-color="#635248"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="96" y="112" width="1008" height="576" rx="28" fill="#f4eee7" opacity=".34"/>
+  <rect x="228" y="190" width="286" height="390" rx="20" fill="#3d322d" opacity=".72"/>
+  <rect x="474" y="248" width="336" height="220" rx="18" fill="#8a6c58" opacity=".72"/>
+  <rect x="842" y="216" width="110" height="316" rx="18" fill="#e5d2bf" opacity=".72"/>
+  <path d="M274 240l180 286" stroke="#c3a892" stroke-width="18" stroke-linecap="round" opacity=".38"/>
+  <ellipse cx="608" cy="616" rx="316" ry="78" fill="#40332d" opacity=".18"/>
+</svg>
