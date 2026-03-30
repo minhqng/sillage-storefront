@@ -1,0 +1,164 @@
+{
+  "brand": {
+    "name": "Sillage",
+    "supportName": "NGUYEN QUANG MINH",
+    "supportEmail": "minhnq@gdscptit.dev",
+    "supportPhone": "+84 90 411 2882",
+    "zaloUrl": "https://zalo.me/84904112882",
+    "responseWindow": "Phản hồi trong vòng 24 giờ làm việc.",
+    "serviceHours": "Thứ Hai đến Thứ Sáu, 09:00 - 18:00",
+    "studioAddress": [
+      "Học viện Công nghệ Bưu chính Viễn thông",
+      "Km 10 Nguyễn Trãi, P. Mộ Lao, Q. Hà Đông",
+      "Hà Nội"
+    ]
+  },
+  "footer": {
+    "brandCopy": "Bảy mùi hương chủ đạo và Bộ Khám Phá, dành cho nhịp sống thành thị tại Việt Nam.",
+    "groups": [
+      {
+        "title": "Khám phá",
+        "links": [
+          {
+            "href": "cua-hang.html",
+            "label": "Cửa hàng",
+            "key": "shop"
+          },
+          {
+            "href": "bo-kham-pha.html",
+            "label": "Bộ Khám Phá",
+            "key": "discovery"
+          }
+        ]
+      },
+      {
+        "title": "Tìm hiểu",
+        "links": [
+          {
+            "href": "huong-dan-mui-huong.html",
+            "label": "Hướng dẫn mùi hương",
+            "key": "guide"
+          },
+          {
+            "href": "cau-hoi-thuong-gap.html",
+            "label": "Câu hỏi thường gặp",
+            "key": "faq"
+          }
+        ]
+      },
+      {
+        "title": "Hỗ trợ",
+        "links": [
+          {
+            "href": "lien-he.html",
+            "label": "Liên hệ",
+            "key": "contact"
+          },
+          {
+            "href": "gio-hang.html",
+            "label": "Giỏ hàng",
+            "key": "cart"
+          },
+          {
+            "href": "thanh-toan.html",
+            "label": "Thanh toán",
+            "key": "checkout"
+          }
+        ]
+      }
+    ],
+    "newsletter": {
+      "title": "Nhận ghi chú mùi hương",
+      "copy": ""
+    }
+  },
+  "discovery": {
+    "eyebrow": "Bắt đầu an tâm hơn",
+    "title": "Thử trọn thư viện mùi hương trên da trước khi chọn chai lớn.",
+    "summary": "Bộ Khám Phá đưa toàn bộ bảy mùi hương chủ đạo vào các lọ 2 ml để bạn so sánh tại nhà, trong nhiều ngày, thay vì phải quyết định chỉ sau vài phút thử.",
+    "benefits": [
+      {
+        "title": "Bảy hướng mùi, một quyết định rõ ràng hơn",
+        "copy": "So sánh hổ phách, sung, diên vĩ, cỏ hương bài, cam khoáng, gỗ khói và hoa cam trong cùng một bộ để gu mùi hiện ra rõ ràng."
+      },
+      {
+        "title": "Phù hợp cho quà tặng tinh tế",
+        "copy": "Một lựa chọn an toàn khi bạn biết người nhận có gu nhưng chưa chắc nên bắt đầu bằng chai nào."
+      },
+      {
+        "title": "Dễ mang theo khi đi làm hoặc du lịch",
+        "copy": "Các lọ nhỏ gọn nằm vừa túi xách, balo hoặc hành lý cabin để bạn thử mùi trong nhiều bối cảnh khác nhau."
+      }
+    ],
+    "ritualSteps": [
+      {
+        "label": "01",
+        "title": "Mỗi ngày chỉ mặc một mùi hương.",
+        "copy": "Hãy để một mùi hương đi cùng cả ngày làm việc hoặc ngày cuối tuần, rồi quan sát cách nó mở ra, lắng xuống và đọng lại trên da."
+      },
+      {
+        "label": "02",
+        "title": "So sánh với một hướng mùi đối lập.",
+        "copy": "Thử chuyển từ hổ phách sang sung, từ cam khoáng sang hoa trắng, hoặc từ cỏ hương bài sang diên vĩ để gu mùi của bạn lộ rõ hơn."
+      },
+      {
+        "label": "03",
+        "title": "Quay lại với chai khiến bạn nhớ đến nhiều nhất.",
+        "copy": "Khi một mùi hương tiếp tục xuất hiện trong trí nhớ ở lần thử thứ hai hoặc thứ ba, đó thường là thời điểm tự nhiên để chuyển sang chai lớn."
+      }
+    ],
+    "ctaTitle": "Đã biết chai nào hợp mình nhất?",
+    "ctaCopy": "Khi lựa chọn đã rõ ràng, hãy quay lại cửa hàng để xem đủ các dung tích hoặc mở ngay trang chi tiết sản phẩm bạn muốn."
+  },
+  "contactMethods": [
+    {
+      "eyebrow": "Chăm sóc khách hàng",
+      "title": "Hỗ trợ đơn hàng, quà tặng và tư vấn chọn mùi",
+      "value": "minhnq@gdscptit.dev",
+      "href": "mailto:minhnq@gdscptit.dev",
+      "copy": "Email là kênh nhanh nhất để đổi địa chỉ trước khi gửi, thêm ghi chú quà tặng, hoặc xin tư vấn giữa chai lớn và Bộ Khám Phá."
+    },
+    {
+      "eyebrow": "Tổng đài tư vấn",
+      "title": "Phản hồi trực tiếp trong giờ làm việc",
+      "value": "+84 90 411 2882",
+      "href": "tel:+84904112882",
+      "copy": "Phù hợp khi bạn cần xác nhận thời gian giao hàng, hỏi nhanh về quà tặng hoặc cần so sánh hai mùi hương đang phân vân."
+    },
+    {
+      "eyebrow": "Studio đóng gói",
+      "title": "Xử lý đơn hàng tại Hà Nội",
+      "value": "Học viện Công nghệ Bưu chính Viễn thông, Km 10 Nguyễn Trãi, P. Mộ Lao, Q. Hà Đông, Hà Nội",
+      "href": "https://maps.google.com/?q=20.980913,105.7874165",
+      "copy": "Sillage vận hành chủ yếu trực tuyến, nhưng việc đóng gói, quà tặng và xử lý yêu cầu khách hàng được thực hiện từ studio tại Hà Đông, Hà Nội."
+    }
+  ],
+  "serviceCommitments": [
+    {
+      "title": "Phản hồi gọn, rõ trong một ngày làm việc",
+      "copy": "Mỗi phản hồi được viết để giúp bạn ra quyết định nhanh hơn, không dùng ngôn ngữ vòng vo hoặc làm tăng thêm phân vân."
+    },
+    {
+      "title": "Hỗ trợ chỉnh sửa đơn trước khi bàn giao vận chuyển",
+      "copy": "Nếu cần đổi địa chỉ, bổ sung ghi chú quà tặng hoặc cập nhật người nhận, đội ngũ sẽ xác nhận trực tiếp khi đơn chưa rời studio."
+    },
+    {
+      "title": "Tư vấn ưu tiên Bộ Khám Phá khi bạn còn lưỡng lự",
+      "copy": "Sillage ưu tiên giúp khách bắt đầu chậm rãi và đúng mùi hơn là thúc ép vào một chai lớn quá sớm."
+    }
+  ],
+  "faqShortcuts": [
+    {
+      "label": "Giao hàng và vận chuyển",
+      "href": "cau-hoi-thuong-gap.html#giao-hang-van-chuyen"
+    },
+    {
+      "label": "Khám phá và đổi trả",
+      "href": "cau-hoi-thuong-gap.html#kham-pha-doi-tra"
+    },
+    {
+      "label": "Đặt hàng và thanh toán",
+      "href": "cau-hoi-thuong-gap.html#dat-hang-thanh-toan"
+    }
+  ]
+}

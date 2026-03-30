@@ -1,0 +1,61 @@
+{
+  "groups": [
+    {
+      "id": "giao-hang-van-chuyen",
+      "eyebrow": "Giao hàng và vận chuyển",
+      "title": "Thời gian chuẩn bị, giao hàng và hỗ trợ chỉnh sửa đơn.",
+      "items": [
+        {
+          "question": "Khi nào Sillage bắt đầu xử lý đơn hàng?",
+          "answer": "Đơn hàng thường được chuẩn bị trong vòng một ngày làm việc. Với các đợt quà tặng hoặc ra mắt mới, thời gian có thể kéo dài hơn một chút, nhưng đội ngũ sẽ chủ động thông báo nếu có thay đổi."
+        },
+        {
+          "question": "Tôi có thể đổi địa chỉ giao hàng sau khi đặt không?",
+          "answer": "Có, miễn là kiện hàng chưa được bàn giao cho đơn vị vận chuyển. Hãy liên hệ càng sớm càng tốt qua email hoặc tổng đài kèm mã đơn hàng để đội ngũ kiểm tra và xác nhận."
+        },
+        {
+          "question": "Có lựa chọn giao nhanh không?",
+          "answer": "Có. Tại bước thanh toán, bạn có thể chọn giao tiêu chuẩn hoặc giao nhanh. Giao nhanh phù hợp khi cần nhận hàng sớm tại các khu vực trung tâm."
+        }
+      ]
+    },
+    {
+      "id": "kham-pha-doi-tra",
+      "eyebrow": "Khám phá và đổi trả",
+      "title": "Dùng thử, quà tặng và đổi trả chai chưa mở.",
+      "items": [
+        {
+          "question": "Vì sao nên bắt đầu với Bộ Khám Phá?",
+          "answer": "Bộ Khám Phá giúp bạn thử toàn bộ bảy mùi hương trên da, qua nhiều ngày và trong các bối cảnh thật. Đây là cách chắc chắn nhất để chọn đúng chai lớn mà không phải đoán."
+        },
+        {
+          "question": "Chai chưa mở có thể đổi trả không?",
+          "answer": "Có. Chai còn nguyên niêm phong và chưa mở có thể được xem xét đổi trả trong vòng 14 ngày kể từ ngày nhận. Đội ngũ chăm sóc khách hàng sẽ hướng dẫn quy trình cụ thể trước khi bạn gửi lại."
+        },
+        {
+          "question": "Bộ Khám Phá có phù hợp làm quà không?",
+          "answer": "Rất phù hợp. Đây là món quà an toàn và tinh tế khi bạn biết người nhận có gu nhưng chưa chắc nên bắt đầu bằng mùi hương nào."
+        }
+      ]
+    },
+    {
+      "id": "dat-hang-thanh-toan",
+      "eyebrow": "Đặt hàng và thanh toán",
+      "title": "Giỏ hàng, thanh toán và xác nhận đơn hàng.",
+      "items": [
+        {
+          "question": "Giỏ hàng của tôi có được lưu lại nếu tôi đóng trang không?",
+          "answer": "Có. Lựa chọn trong giỏ hàng được giữ lại trên chính thiết bị bạn đang dùng để bạn có thể quay lại xem, tải lại trang hoặc hoàn tất đơn sau."
+        },
+        {
+          "question": "Khi nào tôi nhận được xác nhận đơn hàng?",
+          "answer": "Thông tin xác nhận hiển thị ngay sau khi bạn hoàn tất thanh toán trên website. Nếu cần hỗ trợ thêm về giao hàng, quà tặng hoặc chọn mùi, bạn có thể liên hệ đội ngũ chăm sóc khách hàng sau đó."
+        },
+        {
+          "question": "Website đang hỗ trợ hình thức thanh toán nào?",
+          "answer": "Hiện tại website hỗ trợ thanh toán bằng thẻ. Bạn chỉ cần nhập thông tin nhận hàng, chọn phương thức giao và hoàn tất ở bước thanh toán."
+        }
+      ]
+    }
+  ]
+}

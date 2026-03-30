@@ -1,0 +1,150 @@
+{
+  "families": [
+    {
+      "id": "ho-phach-go",
+      "label": "Hổ phách - gỗ",
+      "title": "Ấm áp nhưng khô ráo, có chiều sâu mà không nặng.",
+      "summary": "Hợp cho buổi tối, bữa hẹn ăn tối, sự kiện cần vẻ chỉn chu và những ngày trời mát khi bạn muốn một mùi hương ôm sát cơ thể.",
+      "signals": [
+        "Nhựa thơm và tuyết tùng",
+        "Gia vị nhẹ",
+        "Dư hương ấm, gọn"
+      ],
+      "wearMoments": [
+        "Bữa tối buổi tối",
+        "Sự kiện trang trọng",
+        "Ngày mát hoặc phòng lạnh"
+      ],
+      "recommendedProductIds": [
+        "amber-veil",
+        "cedar-ink"
+      ]
+    },
+    {
+      "id": "sung-xanh",
+      "label": "Sung xanh",
+      "title": "Tươi mát với lá xanh, bóng râm và vị trà nhẹ.",
+      "summary": "Dành cho ban ngày, cuối tuần hoặc môi trường làm việc sáng tạo khi bạn muốn cảm giác xanh mát nhưng vẫn có cá tính.",
+      "signals": [
+        "Lá và thân sung",
+        "Trà đen",
+        "Độ mát khoáng"
+      ],
+      "wearMoments": [
+        "Ngày đi làm linh hoạt",
+        "Cuối tuần cà phê",
+        "Mùa xuân và đầu thu"
+      ],
+      "recommendedProductIds": [
+        "stone-fig"
+      ]
+    },
+    {
+      "id": "dien-vi-phan",
+      "label": "Diên vĩ phấn",
+      "title": "Mờ nhẹ, sạch và gần da.",
+      "summary": "Phù hợp cho văn phòng, phòng trưng bày, cuộc hẹn ban ngày hoặc bất kỳ ai thích mùi hương tinh tế hơn là phô bày.",
+      "signals": [
+        "Kết cấu phấn mịn",
+        "Xạ hương sạch",
+        "Hoa nhẹ và gỗ sáng"
+      ],
+      "wearMoments": [
+        "Ngày văn phòng",
+        "Gặp gỡ ban ngày",
+        "Trời xuân mát"
+      ],
+      "recommendedProductIds": [
+        "iris-trace"
+      ]
+    },
+    {
+      "id": "co-huong-bai-go",
+      "label": "Cỏ hương bài - gỗ",
+      "title": "Khô, sáng và rất linh hoạt.",
+      "summary": "Hợp cho nhịp sống hàng ngày, đi làm, di chuyển hoặc tủ đồ tối giản cần một mùi gỗ sạch, gọn và không khói.",
+      "signals": [
+        "Cỏ hương bài và bách xanh",
+        "Cam sáng ở tầng đầu",
+        "Năng lượng chỉn chu"
+      ],
+      "wearMoments": [
+        "Ngày đi làm",
+        "Đi công tác",
+        "Thời tiết ấm đến mát"
+      ],
+      "recommendedProductIds": [
+        "vetiver-form"
+      ]
+    },
+    {
+      "id": "cam-khoang",
+      "label": "Cam khoáng",
+      "title": "Sáng, thoáng và sạch trên da nóng.",
+      "summary": "Một lựa chọn rất hợp khí hậu Việt Nam, đặc biệt cho mùa nắng, du lịch hoặc người muốn chai đầu tiên dễ dùng.",
+      "signals": [
+        "Vỏ cam",
+        "Muối và neroli",
+        "Xạ hương thoáng"
+      ],
+      "wearMoments": [
+        "Sáng mùa hè",
+        "Ngày du lịch",
+        "Đi làm trong thời tiết nóng"
+      ],
+      "recommendedProductIds": [
+        "salt-archive"
+      ]
+    },
+    {
+      "id": "hoa-trang-cam",
+      "label": "Hoa trắng - cam",
+      "title": "Neroli và hoa cam giữ trong trẻo.",
+      "summary": "Dành cho quà tặng, lịch trình ban ngày và người thích hương hoa sạch, sáng mà vẫn có độ mềm mại thanh lịch.",
+      "signals": [
+        "Hoa cam",
+        "Trà xanh",
+        "Xạ hương trong"
+      ],
+      "wearMoments": [
+        "Hẹn cà phê ban ngày",
+        "Quà tặng an toàn",
+        "Mùi hương hàng ngày dễ dùng"
+      ],
+      "recommendedProductIds": [
+        "neroli-shade"
+      ]
+    }
+  ],
+  "howToChoose": [
+    {
+      "label": "01",
+      "title": "Bắt đầu từ bầu không khí bạn muốn mang theo.",
+      "copy": "Hãy nghĩ đến cảm giác bạn muốn mặc cùng: vải lanh, lá sung, gỗ khô, phấn mịn, trà, ánh nắng hay không khí biển. Cảm giác đó thường giúp bạn tìm đúng chai nhanh hơn việc nhớ thật nhiều thuật ngữ nước hoa."
+    },
+    {
+      "label": "02",
+      "title": "Thu hẹp còn một hoặc hai hướng rồi thử trên da.",
+      "copy": "Khi một nhóm hương đã nghe đúng, đừng mở quá nhiều lựa chọn. Bộ Khám Phá được tạo ra để bạn xác nhận quyết định qua nhiều lần mặc, không phải chốt mua vì cảm hứng thoáng qua."
+    },
+    {
+      "label": "03",
+      "title": "Chọn chai bạn muốn dùng lặp lại, không chỉ muốn sưu tầm.",
+      "copy": "Mùi hương phù hợp nên khiến bạn dễ quay lại vào sáng hôm sau. Nếu một chai chỉ đẹp trên giấy nhưng khó mặc ngoài đời, đó chưa phải lựa chọn đúng."
+    }
+  ],
+  "noteGlossary": [
+    {
+      "term": "Nốt đầu",
+      "description": "Ấn tượng mở đầu của mùi hương. Chúng tạo nhịp ban đầu rồi nhường chỗ dần trong khoảng giờ đầu tiên."
+    },
+    {
+      "term": "Nốt giữa",
+      "description": "Phần thân của mùi hương. Đây là nơi cá tính chính hiện rõ khi độ tươi sáng ban đầu dịu xuống."
+    },
+    {
+      "term": "Nốt cuối",
+      "description": "Phần đọng lại trên da. Gỗ, xạ hương, nhựa thơm và cảm giác ấm thường nằm ở lớp này."
+    }
+  ]
+}
