@@ -1,0 +1,111 @@
+.sl-product-card {
+  display: grid;
+  align-content: start;
+  gap: var(--sl-space-4);
+  height: 100%;
+  border-top: 1px solid rgba(171, 154, 134, 0.5);
+  padding-top: var(--sl-space-5);
+}
+
+.sl-product-card__link {
+  display: grid;
+  gap: var(--sl-space-4);
+  height: 100%;
+  text-decoration: none;
+}
+
+.sl-product-card__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--sl-color-border);
+  border-radius: var(--sl-radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent 76%),
+    rgba(246, 241, 232, 0.54);
+  box-shadow: var(--sl-shadow-1);
+  transition:
+    border-color var(--sl-duration-base) var(--sl-ease-standard),
+    box-shadow var(--sl-duration-base) var(--sl-ease-standard),
+    transform var(--sl-duration-base) var(--sl-ease-standard);
+}
+
+.sl-product-card__art {
+  height: 100%;
+}
+
+.sl-product-card__body {
+  display: grid;
+  gap: var(--sl-space-2);
+}
+
+.sl-product-card__header {
+  display: flex;
+  gap: var(--sl-space-3);
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.sl-product-card__price {
+  color: var(--sl-color-heading);
+  font-size: clamp(1.02rem, 1.45vw, 1.14rem);
+  font-weight: var(--sl-type-price-weight);
+  line-height: var(--sl-line-price);
+  letter-spacing: var(--sl-track-price);
+  white-space: nowrap;
+}
+
+.sl-product-card__tagline {
+  max-width: 28ch;
+  color: var(--sl-color-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.sl-product-card__actions {
+  display: grid;
+}
+
+.sl-product-card__quick-add {
+  width: 100%;
+}
+
+.sl-product-card__quick-add.is-added {
+  border-color: var(--sl-color-inverse);
+  background: var(--sl-color-inverse);
+  color: var(--sl-color-inverse-text);
+}
+
+@media (hover: hover) {
+  .sl-product-card__link:hover .sl-product-card__media {
+    border-color: var(--sl-color-border-strong);
+    box-shadow: var(--sl-shadow-2);
+    transform: translateY(-2px);
+  }
+
+  .sl-product-card__link:hover .sl-artwork__image {
+    transform: scale(1.03);
+  }
+}
+
+@media (hover: hover) and (min-width: 992px) {
+  .sl-product-card--quick-add .sl-product-card__actions {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition:
+      max-height var(--sl-duration-base) var(--sl-ease-standard),
+      opacity var(--sl-duration-base) var(--sl-ease-standard),
+      transform var(--sl-duration-base) var(--sl-ease-standard);
+  }
+
+  .sl-product-card--quick-add:hover .sl-product-card__actions,
+  .sl-product-card--quick-add:focus-within .sl-product-card__actions {
+    max-height: 4.5rem;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
