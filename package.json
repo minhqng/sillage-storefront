@@ -1,0 +1,20 @@
+{
+  "name": "sillage-storefront",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.2.11",
+    "@fontsource/lora": "^5.2.8",
+    "@fontsource/manrope": "^5.2.8",
+    "bootstrap": "5.3.8"
+  },
+  "devDependencies": {
+    "vite": "8.0.3"
+  }
+}
