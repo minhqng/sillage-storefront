@@ -21,22 +21,51 @@ const footerAddress = footerAddressSource ?? [
   "Hà Nội"
 ];
 const footerAddressLine = footerAddress.join(", ");
+const footerMapMeta = siteContent.footer?.map ?? {};
+const footerMapLabel =
+  typeof footerMapMeta.label === "string" && footerMapMeta.label.trim() ? footerMapMeta.label.trim() : "Bản đồ";
+const footerMapAddress =
+  typeof footerMapMeta.shortAddress === "string" && footerMapMeta.shortAddress.trim()
+    ? footerMapMeta.shortAddress.trim()
+    : footerAddress.slice(-2).join(", ");
+const footerMapCta =
+  typeof footerMapMeta.cta === "string" && footerMapMeta.cta.trim()
+    ? footerMapMeta.cta.trim()
+    : "Mở Google Maps";
 const footerNewsletter = siteContent.footer?.newsletter ?? {
   title: "Nhận ghi chú mùi hương",
-  copy: ""
+  copy: "Gợi ý chọn mùi, cách thử trên da và cập nhật từ nhà hương."
 };
+const footerMapLink =
+  siteContent.contactMethods?.find(
+    (method) => typeof method?.href === "string" && method.href.includes("maps.google")
+  )?.href ?? "https://maps.google.com/?q=20.980913,105.7874165";
 const footerNewsletterTitle =
   typeof footerNewsletter.title === "string" && footerNewsletter.title.trim()
     ? footerNewsletter.title.trim()
     : "Nhận ghi chú mùi hương";
 const footerNewsletterCopy =
   typeof footerNewsletter.copy === "string" && footerNewsletter.copy.trim() ? footerNewsletter.copy.trim() : "";
+const footerUtilityLinks = Array.isArray(siteContent.footer?.utilityLinks)
+  ? siteContent.footer.utilityLinks
+      .filter((entry) => typeof entry?.href === "string" && typeof entry?.label === "string")
+      .slice(0, 3)
+  : [];
 const footerSocialLinks = Array.isArray(siteContent.footer?.socialLinks)
   ? siteContent.footer.socialLinks
   : [
       { label: "Instagram", href: "https://www.instagram.com/" },
       { label: "Facebook", href: "https://www.facebook.com/" }
     ];
+
+function renderExternalIcon(className = "") {
+  return `
+    <svg class="${className}" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      <path d="M5 4h7v7" />
+      <path d="M4.2 11.8 12 4" />
+    </svg>
+  `;
+}
 
 function renderSocialIcon(label) {
   if (label === "Instagram") {
@@ -63,31 +92,59 @@ function renderSocialLinks() {
         <a class="sl-footer-social" href="${href}" target="_blank" rel="noreferrer">
           <span class="sl-footer-social__icon">${renderSocialIcon(label)}</span>
           <span>${label}</span>
+          ${renderExternalIcon("sl-footer-social__external")}
         </a>
       `
     )
     .join("");
 }
 
-function renderFooterMap() {
+function isSupportGroup({ title, links }) {
+  const normalizedTitle = String(title ?? "")
+    .trim()
+    .toLowerCase();
+
+  if (normalizedTitle === "hỗ trợ" || normalizedTitle === "ho tro") {
+    return true;
+  }
+
+  const keys = Array.isArray(links)
+    ? links.map((entry) => String(entry?.key ?? "").trim().toLowerCase())
+    : [];
+
+  return keys.includes("contact") || keys.includes("checkout");
+}
+
+function renderFooterMapLink() {
   return `
-    <section class="sl-footer-map" aria-label="Bản đồ vị trí">
-      <div class="sl-footer-map__head">
-        <p class="sl-footer-title">Bản đồ</p>
-        <h2 class="sl-footer-map__title">Xem vị trí trên Google Maps</h2>
-      </div>
-      <div class="sl-footer-map__frame-wrap">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.2924008216164!2d105.78741649999999!3d20.980913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135accdd8a1ad71%3A0xa2f9b16036648187!2zSOG7jWMgdmnhu4duIEPDtG5nIG5naOG7hyBCxrB1IGNow61uaCB2aeG7hW4gdGjDtG5n!5e0!3m2!1svi!2s!4v1774880777131!5m2!1svi!2s"
-          width="600"
-          height="450"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+    <section class="sl-footer-map-link" aria-label="Bản đồ showroom">
+      <p class="sl-footer-title">${footerMapLabel}</p>
+      <p class="sl-footer-map-link__address">${footerMapAddress}</p>
+      <a class="sl-footer-link sl-footer-map-link__cta" href="${footerMapLink}" target="_blank" rel="noreferrer">
+        <span>${footerMapCta}</span>
+        ${renderExternalIcon("sl-footer-map-link__icon")}
+      </a>
     </section>
+  `;
+}
+
+function renderFooterUtilityLinks() {
+  if (!footerUtilityLinks.length) {
+    return "";
+  }
+
+  return `
+    <ul class="sl-footer-meta-links" aria-label="Liên kết tiện ích">
+      ${footerUtilityLinks
+        .map(
+          ({ href, label }) => `
+            <li>
+              <a class="sl-footer-link" href="${href}">${label}</a>
+            </li>
+          `
+        )
+        .join("")}
+    </ul>
   `;
 }
 
@@ -97,28 +154,36 @@ export function renderFooter({ currentPage }) {
       <div class="container">
         <div class="sl-footer-top">
           <div class="sl-footer-brand">
-            <div class="sl-stack sl-stack--tight">
+            <section class="sl-footer-brand__statement sl-stack sl-stack--tight">
               <p class="sl-label">Sillage</p>
               <p>${footerBrandCopy}</p>
-            </div>
-            <div class="sl-footer-address">
-              <p class="sl-label sl-muted">Showroom</p>
-              <address>
-                <span>${footerAddressLine}</span>
-              </address>
-            </div>
-            <p class="sl-footer-note">${footerNote}</p>
-            ${footerSupportEmail ? `<a class="sl-footer-link" href="mailto:${footerSupportEmail}">${footerSupportEmail}</a>` : ""}
-            <div class="sl-footer-socials" aria-label="Kênh xã hội">
-              ${renderSocialLinks()}
-            </div>
+            </section>
+
+            <section class="sl-footer-brand__credibility sl-stack sl-stack--tight">
+              <div class="sl-footer-address">
+                <p class="sl-label sl-muted">Showroom</p>
+                <address>
+                  <span>${footerAddressLine}</span>
+                </address>
+              </div>
+              <p class="sl-footer-note">${footerNote}</p>
+            </section>
+
+            <section class="sl-footer-brand__connect sl-stack sl-stack--tight">
+              ${footerSupportEmail ? `<a class="sl-footer-link" href="mailto:${footerSupportEmail}">${footerSupportEmail}</a>` : ""}
+              <div class="sl-footer-socials" aria-label="Kênh xã hội">
+                ${renderSocialLinks()}
+              </div>
+            </section>
           </div>
 
           <div class="sl-footer-nav-grid">
             ${footerGroups
-              .map(
-                ({ title, links }) => `
-                  <div class="sl-footer-column">
+              .map(({ title, links }) => {
+                const supportGroup = isSupportGroup({ title, links });
+
+                return `
+                  <div class="sl-footer-column${supportGroup ? " sl-footer-column--support" : ""}">
                     <h2 class="sl-footer-title">${title}</h2>
                     <ul class="sl-footer-list">
                       ${links
@@ -139,9 +204,10 @@ export function renderFooter({ currentPage }) {
                         })
                         .join("")}
                     </ul>
+                    ${supportGroup ? `<div class="sl-footer-column__map">${renderFooterMapLink()}</div>` : ""}
                   </div>
-                `
-              )
+                `;
+              })
               .join("")}
           </div>
         </div>
@@ -163,12 +229,14 @@ export function renderFooter({ currentPage }) {
                 id="footer-newsletter-email"
                 name="email"
                 type="email"
-                placeholder="minhnq@gdscptit.dev"
+                placeholder="Email của bạn"
                 autocomplete="email"
                 required
                 data-newsletter-email
               />
-              <button class="btn btn-primary" type="submit">Đăng ký</button>
+              <button class="btn btn-primary" type="submit" data-newsletter-submit>
+                Đăng ký
+              </button>
             </div>
             <p class="sl-footer-newsletter__status" data-newsletter-status aria-live="polite"></p>
           </form>
@@ -176,9 +244,8 @@ export function renderFooter({ currentPage }) {
 
         <div class="sl-footer-meta">
           <p>Nhà hương Sillage. <span data-current-year></span></p>
+          ${renderFooterUtilityLinks()}
         </div>
-
-        ${renderFooterMap()}
       </div>
     </footer>
   `;

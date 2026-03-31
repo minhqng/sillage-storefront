@@ -14,7 +14,7 @@
     ]
   },
   "footer": {
-    "brandCopy": "Bảy mùi hương chủ đạo và Bộ Khám Phá, dành cho nhịp sống thành thị tại Việt Nam.",
+    "brandCopy": "Bảy mùi hương chủ đạo cùng Bộ Khám Phá và tư vấn chọn mùi trên cùng một hành trình mua hàng.",
     "groups": [
       {
         "title": "Khám phá",
@@ -35,14 +35,14 @@
         "title": "Tìm hiểu",
         "links": [
           {
-            "href": "huong-dan-mui-huong.html",
-            "label": "Hướng dẫn mùi hương",
-            "key": "guide"
+            "href": "bo-kham-pha.html#tu-van-chon-mui",
+            "label": "Tư vấn chọn mùi",
+            "key": "discovery"
           },
           {
-            "href": "cau-hoi-thuong-gap.html",
-            "label": "Câu hỏi thường gặp",
-            "key": "faq"
+            "href": "bo-kham-pha.html#nghi-thuc-thu-mui",
+            "label": "Nghi thức thử mùi",
+            "key": "discovery-ritual"
           }
         ]
       },
@@ -50,8 +50,8 @@
         "title": "Hỗ trợ",
         "links": [
           {
-            "href": "lien-he.html",
-            "label": "Liên hệ",
+            "href": "cau-hoi-thuong-gap.html#lien-he-tong",
+            "label": "Liên hệ tổng",
             "key": "contact"
           },
           {
@@ -67,27 +67,46 @@
         ]
       }
     ],
+    "map": {
+      "label": "Bản đồ",
+      "shortAddress": "Hà Đông, Hà Nội",
+      "cta": "Mở Google Maps"
+    },
+    "utilityLinks": [
+      {
+        "label": "Chính sách giao hàng",
+        "href": "cau-hoi-thuong-gap.html#giao-hang-van-chuyen"
+      },
+      {
+        "label": "Đổi trả",
+        "href": "cau-hoi-thuong-gap.html#kham-pha-doi-tra"
+      },
+      {
+        "label": "Thanh toán",
+        "href": "cau-hoi-thuong-gap.html#dat-hang-thanh-toan"
+      }
+    ],
     "newsletter": {
       "title": "Nhận ghi chú mùi hương",
-      "copy": ""
+      "copy": "Gợi ý chọn mùi, cách thử trên da và cập nhật từ nhà hương."
     }
   },
   "discovery": {
     "eyebrow": "Bắt đầu an tâm hơn",
     "title": "Thử trọn thư viện mùi hương trên da trước khi chọn chai lớn.",
-    "summary": "Bộ Khám Phá đưa toàn bộ bảy mùi hương chủ đạo vào các lọ 2 ml để bạn so sánh tại nhà, trong nhiều ngày, thay vì phải quyết định chỉ sau vài phút thử.",
+    "summary": "Bộ thử 7 × 2 ml giúp bạn so sánh đủ bảy hướng mùi tại nhà, qua nhiều ngày, trước khi chốt chai lớn.",
     "benefits": [
       {
-        "title": "Bảy hướng mùi, một quyết định rõ ràng hơn",
-        "copy": "So sánh hổ phách, sung, diên vĩ, cỏ hương bài, cam khoáng, gỗ khói và hoa cam trong cùng một bộ để gu mùi hiện ra rõ ràng."
+        "title": "Thử đủ bảy mùi",
+        "copy": "So sánh đầy đủ các hướng mùi trong cùng một bộ để gu yêu thích hiện ra nhanh hơn."
       },
       {
-        "title": "Phù hợp cho quà tặng tinh tế",
-        "copy": "Một lựa chọn an toàn khi bạn biết người nhận có gu nhưng chưa chắc nên bắt đầu bằng chai nào."
+        "title": "Dễ tặng",
+        "copy": "Lựa chọn an toàn khi người nhận có gu rõ nhưng bạn chưa chắc nên bắt đầu bằng chai nào."
       },
       {
-        "title": "Dễ mang theo khi đi làm hoặc du lịch",
-        "copy": "Các lọ nhỏ gọn nằm vừa túi xách, balo hoặc hành lý cabin để bạn thử mùi trong nhiều bối cảnh khác nhau."
+        "title": "Dễ mang theo",
+        "copy": "Lọ nhỏ gọn vừa túi đi làm và hành lý cabin để thử mùi trong nhiều bối cảnh khác nhau."
       }
     ],
     "ritualSteps": [

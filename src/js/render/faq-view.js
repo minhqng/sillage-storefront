@@ -23,7 +23,8 @@ function renderFaqGroup(group) {
   `;
 }
 
-export function renderFaqView({ faqGroups }) {
+export function renderFaqView({ faqGroups, showContactCta = true }) {
+
   return `
     <section class="sl-section sl-faq">
       <div class="container sl-stack sl-stack--loose">
@@ -47,6 +48,9 @@ export function renderFaqView({ faqGroups }) {
           </div>
         </section>
 
+        ${
+          showContactCta
+            ? `
         <section class="sl-faq-cta">
           <div class="sl-stack sl-stack--tight">
             <p class="sl-label sl-muted">Vẫn còn phân vân</p>
@@ -57,10 +61,13 @@ export function renderFaqView({ faqGroups }) {
             </p>
           </div>
           <div class="sl-link-row">
-            <a class="btn btn-primary" href="lien-he.html">Liên hệ chăm sóc khách hàng</a>
+            <a class="btn btn-primary" href="cau-hoi-thuong-gap.html#lien-he-tong">Xem kênh liên hệ</a>
             <a class="btn btn-secondary" href="cua-hang.html">Mở cửa hàng</a>
           </div>
         </section>
+        `
+            : ""
+        }
       </div>
     </section>
   `;

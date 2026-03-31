@@ -94,9 +94,9 @@ function renderEditorialBand() {
         <div class="container">
           <div class="sl-home-editorial-band__copy sl-stack sl-stack--tight">
             <p class="sl-label">Nhịp điệu biên tập</p>
-            <h2>Ánh sáng, thủy tinh và khoảng lặng được giữ cùng một nhịp từ trang chủ đến sản phẩm.</h2>
+            <h2>Ánh sáng, thủy tinh và khoảng lặng được giữ cùng một nhịp.</h2>
             <p class="sl-card-copy">
-              Những bề mặt đá, gỗ và vải thô được chen vào giữa các khối nội dung để trang chủ bớt cảm giác wireframe và giống một thương hiệu đang kể chuyện bằng hình ảnh thật.
+              Những bề mặt đá, gỗ và vải thô được chen vào giữa, một thương hiệu đang kể chuyện bằng hình ảnh thật.
             </p>
           </div>
         </div>
@@ -159,7 +159,7 @@ export function renderHomeView({ products }) {
                 <a class="btn btn-primary btn-primary--hero" href="cua-hang.html">Mở cửa hàng</a>
                 <a class="btn btn-quiet" href="bo-kham-pha.html">Xem Bộ Khám Phá</a>
               </div>
-              <a class="btn btn-quiet sl-home-hero-guide-link" href="huong-dan-mui-huong.html">Hướng dẫn mùi hương</a>
+              <a class="btn btn-quiet sl-home-hero-guide-link" href="bo-kham-pha.html#tu-van-chon-mui">Tư vấn chọn mùi</a>
             </div>
           </div>
 
@@ -178,7 +178,7 @@ export function renderHomeView({ products }) {
               <p class="sl-home-hero-note__text">
                 Cần chốt quà tặng hoặc giao hàng?
               </p>
-              <a class="btn btn-quiet sl-home-hero-note__link" href="lien-he.html">Liên hệ concierge</a>
+              <a class="btn btn-quiet sl-home-hero-note__link" href="cau-hoi-thuong-gap.html#lien-he-tong">Liên hệ concierge</a>
             </div>
           </aside>
         </div>

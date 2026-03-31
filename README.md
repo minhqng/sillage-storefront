@@ -1,41 +1,50 @@
 # Sillage Storefront
 
-Sillage is a static multi-page ecommerce storefront for a premium niche fragrance startup concept. It was built for a university Web Programming project, but the execution is aimed at a commercially believable direct-to-consumer brand experience rather than a default coursework template.
+Sillage Storefront là website ecommerce tĩnh nhiều trang cho đồ án Web Programming, định hướng trải nghiệm thương mại điện tử thực tế (premium D2C) thay vì template học phần mặc định.
 
-## Project Overview
+## Hiện trạng kiến trúc
 
-The site covers a complete browse-to-checkout journey across a tightly curated fragrance catalog:
+Dự án đang vận hành theo mô hình:
 
-- home, shop, product detail, and discovery-set landing
-- brand and support pages
-- persistent cart
-- validated checkout with static confirmation
-
-The brand position is quiet luxury: restrained visuals, editorial product storytelling, and low-friction product discovery.
-
-## Stack
-
-- Vite 8
-- Bootstrap 5.3.8
+- Vite MPA (multi-page application)
+- Bootstrap 5.3.x + hệ style override riêng
 - Vanilla JavaScript ES modules
-- Static HTML pages
-- Local JSON data files
-- `localStorage` for cart persistence
+- Data tách rời trong JSON
+- Giỏ hàng lưu bằng localStorage
 
-## Folder Structure
+Điểm mới quan trọng:
+
+- Trang Hướng dẫn mùi hương đã được gộp vào trang Bộ Khám Phá (section nội trang)
+- Trang Liên hệ đã được gộp vào trang Câu hỏi thường gặp thành Liên hệ tổng
+- Hai route cũ vẫn tồn tại dưới dạng redirect để không gãy link
+
+## Route công khai
+
+| Trang | Route | Ghi chú |
+|---|---|---|
+| Trang chủ | index.html | Entry chính, mở luồng mua hàng |
+| Cửa hàng | cua-hang.html | Listing, filter, sort |
+| Chi tiết sản phẩm | chi-tiet-san-pham.html?san-pham=... | PDP cho full-size |
+| Bộ Khám Phá | bo-kham-pha.html | Mua discovery + tư vấn chọn mùi |
+| Liên hệ tổng | cau-hoi-thuong-gap.html | Contact + FAQ trong cùng trang |
+| Giỏ hàng | gio-hang.html | Quản lý cart |
+| Thanh toán | thanh-toan.html | Checkout tĩnh + xác nhận |
+| Redirect Guide (legacy) | huong-dan-mui-huong.html | Redirect sang bo-kham-pha.html#tu-van-chon-mui |
+| Redirect Contact (legacy) | lien-he.html | Redirect sang cau-hoi-thuong-gap.html#lien-he-tong |
+
+## Cấu trúc thư mục
 
 ```text
 .
 |-- index.html
-|-- shop.html
-|-- product.html
-|-- discovery.html
-|-- about.html
-|-- guide.html
-|-- faq.html
-|-- contact.html
-|-- cart.html
-|-- checkout.html
+|-- cua-hang.html
+|-- chi-tiet-san-pham.html
+|-- bo-kham-pha.html
+|-- huong-dan-mui-huong.html
+|-- cau-hoi-thuong-gap.html
+|-- lien-he.html
+|-- gio-hang.html
+|-- thanh-toan.html
 |-- public/
 |   |-- favicon/
 |   `-- images/
@@ -48,65 +57,76 @@ The brand position is quiet luxury: restrained visuals, editorial product storyt
 |   |-- js/
 |   |   |-- core/
 |   |   |-- entries/
-|   |   `-- render/
+|   |   |-- render/
+|   |   `-- utils/
 |   `-- styles/
 |       |-- tokens.css
 |       |-- bootstrap-overrides.css
+|       |-- utilities.css
 |       |-- main.css
 |       `-- components/
-|-- dist/
+|-- tests/
 |-- package.json
 `-- vite.config.js
 ```
 
-## Setup Instructions
+## Cài đặt và chạy
 
 ```bash
 npm install
 npm run dev
 ```
 
-Build for production:
+Build production:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Feature List
+## Luồng người dùng chính
 
-- JSON-driven fragrance catalog with 7 signature scents and 1 Discovery Set
-- Multi-page architecture with a dedicated entry module for each page
-- Shop filtering by fragrance family and occasion
-- Sorting controls with URL query-state persistence
-- Product detail routing through `product.html?slug=...`
-- Shared page shell with reusable header, footer, and intro patterns
-- Persistent cart badge and cross-page cart state
-- Add, remove, increment, decrement, and direct quantity editing in cart
-- Cart re-hydration against the current catalog to remove stale items and refresh prices
-- Client-side checkout validation, shipping selection, and static order confirmation
-- Premium editorial support pages for story, guide, FAQ, and contact
+1. Home -> Cửa hàng -> Chi tiết sản phẩm -> Thêm giỏ -> Thanh toán.
+2. Home/Checkout -> Bộ Khám Phá -> Tư vấn chọn mùi -> quay lại Cửa hàng với filter nhóm hương.
+3. Mọi nhu cầu hỗ trợ -> Liên hệ tổng (contact methods + FAQ trong một nơi).
 
-## Technical Decisions
+## Data và state
 
-- `src/data/products.json` is the main product source of truth for pricing, sizes, notes, imagery, and discovery-set composition.
-- JSON loading is centralized in `src/js/core/data-store.js`, which caches requests and keeps page scripts small.
-- Rendering is split from business logic: `core/` handles state and data rules, `render/` returns markup, and `entries/` wires each page together.
-- Cart logic is normalized in one store so cart, badge, and checkout all read the same state contract.
-- Product pages are static-safe: the selected product is resolved from the URL slug, not from server routing.
-- Bootstrap is used as a base system, then overridden through custom tokens, `--bs-*` variable remapping, and custom component CSS to remove the default Bootstrap look.
+Nguồn dữ liệu:
 
-## Limitations
+- src/data/products.json: catalog sản phẩm (full-size + discovery set)
+- src/data/site.json: nội dung dùng chung (footer, discovery copy, contact methods...)
+- src/data/guide.json: nội dung tư vấn chọn mùi (được render trong trang Bộ Khám Phá)
+- src/data/faq.json: nhóm FAQ cho Liên hệ tổng
 
-- No backend, database, authentication, or CMS
-- No real payment processing or order persistence
-- No live inventory, shipping API, or account system
-- No reviews, search engine, or personalization layer
+State runtime:
 
-## Future Backend-Ready Extensions
+- URL query string cho filter/sort:
+  - nhom-huong
+  - dip-su-dung
+  - sap-xep
+  - san-pham (ở PDP)
+- localStorage cho cart persistence
 
-- Replace local JSON with a CMS or product API while keeping the same rendering contract
-- Persist carts and orders server-side for signed-in users
-- Connect checkout to a payment gateway such as Stripe
-- Add inventory, promo codes, fulfillment status, and transactional email
-- Add an admin workflow for catalog updates and merchandising
+## Tính năng nổi bật
+
+- Catalog data-driven với 7 mùi chủ đạo + 1 Discovery Set
+- Shop filter/sort với trạng thái lưu qua URL
+- PDP theo slug query static-safe
+- Discovery page có khối mua hàng + khối tư vấn chọn mùi tích hợp
+- Cart đồng bộ xuyên trang, có badge và hydrate lại từ catalog hiện tại
+- Checkout validate phía client và hiển thị xác nhận đơn tĩnh
+- Footer, header, page shell dùng chung toàn site
+
+## Ràng buộc
+
+- Không backend, không database, không auth
+- Không thanh toán thật, không quản lý tồn kho realtime
+- Không có hệ thống tài khoản người dùng
+
+## Mở rộng trong tương lai
+
+- Gắn CMS/API thay cho JSON cục bộ
+- Lưu đơn hàng và giỏ hàng phía server
+- Tích hợp payment gateway
+- Bổ sung quản trị sản phẩm và vận hành fulfillment

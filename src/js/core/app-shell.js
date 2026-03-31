@@ -150,40 +150,74 @@ function bindNewsletterForm(root) {
   const form = root.querySelector("[data-newsletter-form]");
   const input = root.querySelector("[data-newsletter-email]");
   const status = root.querySelector("[data-newsletter-status]");
+  const submitButton = root.querySelector("[data-newsletter-submit]");
   const storage = getStorage();
 
-  if (!(form instanceof HTMLFormElement) || !(input instanceof HTMLInputElement) || !(status instanceof HTMLElement)) {
+  if (
+    !(form instanceof HTMLFormElement) ||
+    !(input instanceof HTMLInputElement) ||
+    !(status instanceof HTMLElement) ||
+    !(submitButton instanceof HTMLButtonElement)
+  ) {
     return;
   }
 
-  if (storage) {
-    const savedEmail = storage.getItem(NEWSLETTER_STORAGE_KEY);
+  const defaultSubmitLabel = submitButton.textContent?.trim() || "Đăng ký";
+  let submitTimer = null;
 
-    if (savedEmail) {
-      input.value = savedEmail;
+  const setStatus = (message, tone = "") => {
+    status.textContent = message;
+    status.classList.remove("is-error", "is-success", "is-loading");
+
+    if (tone) {
+      status.classList.add(tone);
     }
-  }
+  };
+
+  const setLoadingState = (isLoading) => {
+    form.classList.toggle("is-loading", isLoading);
+    submitButton.disabled = isLoading;
+    submitButton.setAttribute("aria-busy", String(isLoading));
+    submitButton.textContent = isLoading ? "Đang lưu..." : defaultSubmitLabel;
+  };
+
+  input.addEventListener("input", () => {
+    if (status.classList.contains("is-error")) {
+      setStatus("");
+    }
+  });
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     if (!input.checkValidity()) {
-      status.textContent = "Vui lòng nhập địa chỉ email hợp lệ.";
-      status.classList.add("is-error");
+      setStatus("Vui lòng nhập địa chỉ email hợp lệ.", "is-error");
       input.reportValidity();
       return;
     }
 
-    if (storage) {
-      try {
-        storage.setItem(NEWSLETTER_STORAGE_KEY, input.value.trim());
-      } catch {
-        // Keep the current session usable even if localStorage is unavailable.
-      }
+    if (submitTimer) {
+      window.clearTimeout(submitTimer);
     }
 
-    status.classList.remove("is-error");
-    status.textContent = "Đã lưu email cho ghi chú mùi hương mới và restock tiếp theo.";
+    const trimmedEmail = input.value.trim();
+
+    setLoadingState(true);
+    setStatus("Đang lưu email của bạn cho bản tin mùi hương.", "is-loading");
+
+    submitTimer = window.setTimeout(() => {
+      if (storage) {
+        try {
+          storage.setItem(NEWSLETTER_STORAGE_KEY, trimmedEmail);
+        } catch {
+          // Continue gracefully even if localStorage is unavailable.
+        }
+      }
+
+      setLoadingState(false);
+      setStatus("Đăng ký thành công. Bạn sẽ nhận ghi chú mùi hương và cập nhật mới nhất.", "is-success");
+      submitTimer = null;
+    }, 420);
   });
 }
 

@@ -202,7 +202,7 @@ function renderTrustBand() {
         <div class="sl-checkout-trust__icon">${renderTrustGlyph("support")}</div>
         <p class="sl-label sl-muted">Hỗ trợ trước khi đặt</p>
         <h3>Cần xác nhận quà tặng, giao nhanh hay đổi người nhận?</h3>
-        <p class="sl-card-copy">Hãy <a href="lien-he.html">liên hệ concierge</a> trước khi đặt nếu bạn muốn chốt lại lần cuối các chi tiết của đơn.</p>
+        <p class="sl-card-copy">Hãy <a href="cau-hoi-thuong-gap.html#lien-he-tong">liên hệ concierge</a> trước khi đặt nếu bạn muốn chốt lại lần cuối các chi tiết của đơn.</p>
       </article>
     </section>
   `;
@@ -561,7 +561,7 @@ export function renderCheckoutSuccessState() {
 
           <div class="sl-link-row">
             <a class="btn btn-primary" href="cua-hang.html">Tiếp tục mua sắm</a>
-            <a class="btn btn-quiet" href="huong-dan-mui-huong.html">Đọc hướng dẫn chọn mùi</a>
+            <a class="btn btn-quiet" href="bo-kham-pha.html#tu-van-chon-mui">Xem tư vấn chọn mùi</a>
           </div>
         </div>
       </div>

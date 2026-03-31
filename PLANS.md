@@ -31,6 +31,137 @@
 - blocked
 - done
 
+## Discovery + Guide Consolidation
+- Objective: Bỏ route Hướng dẫn như một trang riêng, gộp phần nội dung tư vấn chọn mùi phù hợp vào trang Bộ Khám Phá, và giữ luồng điều hướng thương mại điện tử liền mạch không link gãy.
+- Files to create or modify:
+  - `PLANS.md`
+  - `bo-kham-pha.html`
+  - `huong-dan-mui-huong.html`
+  - `src/data/site.json`
+  - `src/js/entries/discovery.js`
+  - `src/js/entries/guide.js`
+  - `src/js/entries/home.js`
+  - `src/js/render/discovery-view.js`
+  - `src/js/render/header.js`
+  - `src/js/render/home-view.js`
+  - `src/js/render/checkout-view.js`
+  - `src/styles/components/support-pages.css`
+- Dependencies:
+  - `AGENTS.md`
+  - Existing Discovery page structure and cart binding behavior
+  - `src/data/guide.json` as source for guidance content
+- Risks:
+  - Link cũ tới guide có thể tạo trải nghiệm lỗi nếu không redirect chuẩn
+  - Gộp quá nhiều nội dung tư vấn vào Discovery có thể làm trang dài và loãng chuyển đổi
+  - Active-state điều hướng có thể sai nếu key/footer không được cập nhật đồng bộ
+- Acceptance criteria:
+  - Không còn điều hướng chính trỏ tới guide như một page độc lập
+  - `huong-dan-mui-huong.html` chuyển hướng an toàn sang phần tư vấn trong Discovery
+  - Discovery hiển thị thêm khối tư vấn chọn mùi từ dữ liệu guide theo hướng phục vụ mua hàng
+  - Home/Checkout/CTA liên quan tới guide đều trỏ về Discovery section mới
+  - Build thành công, không lỗi runtime rõ ràng trong luồng chính
+- Manual verification steps:
+  1. Mở `bo-kham-pha.html` và xác nhận có section tư vấn chọn mùi cùng section nghi thức thử mùi.
+  2. Bấm các CTA “Tư vấn chọn mùi” từ Home/Checkout/Footer và xác nhận trỏ đúng anchor trên Discovery.
+  3. Truy cập trực tiếp `huong-dan-mui-huong.html` và xác nhận redirect ngay sang Discovery.
+  4. Chạy `npm run build` và xác nhận build sạch.
+- Status: done
+
+## Discovery Page Refinement - Density and Conversion Balance
+- Objective: Tinh chỉnh trang Bộ Khám Phá theo hướng nén hero, giảm text-heavy ở cột trái, tăng lực visual cho 3 benefits, và nâng product card bên phải thành điểm chốt đơn rõ ràng hơn mà vẫn giữ luxury minimalism.
+- Files to create or modify:
+  - `PLANS.md`
+  - `src/data/site.json`
+  - `src/js/entries/discovery.js`
+  - `src/js/render/discovery-view.js`
+  - `src/styles/components/support-pages.css`
+- Dependencies:
+  - `AGENTS.md`
+  - `PROJECT_BRIEF.md`
+  - `DESIGN_SYSTEM.md`
+  - Existing discovery entry/view and support-page styling system
+- Risks:
+  - Nén hero quá mức có thể làm trang mất nhịp editorial cần thiết
+  - Tăng lực card phải quá tay có thể phá cân bằng visual với cột trái
+  - Rút copy benefits nếu không đủ sắc có thể làm giảm độ rõ về giá trị sản phẩm
+- Acceptance criteria:
+  - Hero mở đầu bớt rỗng và lên nội dung chính sớm hơn
+  - Cột trái giảm lượng chữ lặp ý, benefits ngắn và có phân cấp mạnh hơn
+  - Product card phải có hierarchy rõ hơn cho tên/giá/meta/quantity/CTA
+  - Bố cục trái-phải cân hơn, không còn hụt nhịp rõ ở dưới cụm benefits
+  - Build chạy sạch sau khi chỉnh
+- Manual verification steps:
+  1. Mở `bo-kham-pha.html` desktop: xác nhận khối hero bớt trống và section chính lên sớm hơn.
+  2. So sánh cột trái/phải: cột trái gọn hơn, cột phải giữ vai trò điểm chốt mua rõ.
+  3. Kiểm tra 3 benefits: heading ngắn, dễ quét mắt, body không dài dòng.
+  4. Kiểm tra quantity control + CTA trong card: nhịp spacing và phân cấp primary/secondary rõ.
+  5. Chạy `npm run build` và xác nhận không lỗi.
+- Status: done
+
+## Unified Contact Hub - Merge Contact Into FAQ
+- Objective: Gộp toàn bộ nội dung trang Liên hệ vào trang Câu hỏi thường gặp để tạo một trang Liên hệ tổng duy nhất, đồng thời cập nhật điều hướng và đường dẫn để không còn trải nghiệm tách rời giữa FAQ và Contact.
+- Files to create or modify:
+  - `PLANS.md`
+  - `cau-hoi-thuong-gap.html`
+  - `lien-he.html`
+  - `src/data/site.json`
+  - `src/js/entries/faq.js`
+  - `src/js/render/contact-view.js`
+  - `src/js/render/faq-view.js`
+  - `src/js/render/header.js`
+  - `src/js/render/home-view.js`
+- Dependencies:
+  - `AGENTS.md`
+  - `PROJECT_BRIEF.md`
+  - `DESIGN_SYSTEM.md`
+  - Existing support pages structure and shared app shell
+- Risks:
+  - Gộp hai page có thể tạo lặp CTA nếu không tinh lại nội dung FAQ và Contact
+  - Đổi route liên hệ có thể để lại link cũ gây trải nghiệm đứt đoạn nếu không xử lý chuyển hướng
+  - Đổi nhãn điều hướng có thể gây lệch active state nếu key không đồng bộ
+- Acceptance criteria:
+  - Trang `cau-hoi-thuong-gap.html` trở thành trang Liên hệ tổng và chứa cả block liên hệ lẫn hỏi đáp
+  - Các link trước đây trỏ tới `lien-he.html` được cập nhật hoặc chuyển hướng an toàn sang trang Liên hệ tổng
+  - Header/footer và CTA liên quan phản ánh đúng khái niệm “Liên hệ tổng”
+  - Không phát sinh link gãy, build chạy sạch
+- Manual verification steps:
+  1. Mở `cau-hoi-thuong-gap.html` và xác nhận thấy đủ nội dung liên hệ + FAQ trong cùng một trang.
+  2. Bấm các link Liên hệ từ Home/Footer và xác nhận đều về đúng trang Liên hệ tổng.
+  3. Truy cập trực tiếp `lien-he.html` và xác nhận được chuyển hướng hợp lệ sang trang hợp nhất.
+  4. Chạy `npm run build` và xác nhận không có lỗi.
+- Status: done
+
+## Footer Hierarchy Refinement - Premium Utility Pass
+- Objective: Tái cấu trúc footer theo thứ tự ưu tiên rõ ràng (brand/contact credibility -> navigation -> newsletter -> map link phụ), giảm cảm giác chật ở cột phải, làm states tương tác đủ chuẩn sản phẩm thực chiến, và giảm nhẹ tổng chiều cao footer trong khi vẫn giữ chất premium tối giản.
+- Files to create or modify:
+  - `PLANS.md`
+  - `src/data/site.json`
+  - `src/js/core/app-shell.js`
+  - `src/js/render/footer.js`
+  - `src/styles/components/footer.css`
+- Dependencies:
+  - `AGENTS.md`
+  - `PROJECT_BRIEF.md`
+  - `DESIGN_SYSTEM.md`
+  - Existing shared shell (`app-shell`) and footer renderer/style stack
+- Risks:
+  - Đổi hierarchy footer có thể làm vỡ nhịp spacing trên tablet nếu tỷ lệ grid không được cân kỹ
+  - Đưa map về dạng text-only nhưng đặt sai vị trí có thể làm mất ngữ cảnh showroom
+  - Cập nhật states newsletter nếu không đồng bộ CSS + JS có thể tạo trạng thái “kẹt loading” hoặc feedback mơ hồ
+- Acceptance criteria:
+  - Footer không còn map thumbnail; map hiển thị dạng utility block text gọn với CTA rõ ràng
+  - Cột phải không còn cảm giác quá tải, nhịp 4 cột desktop cân hơn (brand lớn nhất, support không quá hẹp)
+  - Newsletter có placeholder đúng sản phẩm, có copy phụ ngắn, và trạng thái loading/success/error rõ
+  - Footer bottom có utility links nhỏ để tăng độ “storefront thật” nhưng không gây rối
+  - Tổng chiều cao footer giảm nhẹ, vẫn giữ hierarchy rõ trên desktop/mobile/tablet
+- Manual verification steps:
+  1. Mở `index.html` desktop và kiểm tra thứ tự thị giác: brand/contact -> nav -> newsletter -> map utility -> meta bottom.
+  2. Mở `cua-hang.html` và `chi-tiet-san-pham.html`, kiểm tra active link footer nhất quán theo trang hiện tại.
+  3. Trên mobile/tablet, kiểm tra thứ tự stack không vỡ: brand/contact -> nav/support -> newsletter -> map link.
+  4. Test newsletter: nhập sai email, nhập đúng email, submit liên tiếp để xác nhận loading/success/error hoạt động đúng.
+  5. Chạy `npm run build` và xác nhận không có lỗi bundling.
+- Status: done
+
 ## Homepage Simplification Pass - Premium Commerce Focus
 - Objective: Tối giản hero trang chủ theo hướng sang và dễ chốt quyết định mua, giảm lặp thông tin, giữ rõ lộ trình hành vi (vào thẳng chai full-size hoặc bắt đầu bằng Bộ Khám Phá).
 - Files to create or modify:

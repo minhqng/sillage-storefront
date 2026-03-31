@@ -35,12 +35,13 @@ function renderCommitment(commitment) {
   `;
 }
 
-export function renderContactView({ site }) {
+export function renderContactView({ site, sectionId = "" }) {
   const studioAddress = Array.isArray(site.brand?.studioAddress) ? site.brand.studioAddress.join(", ") : "";
   const contactMethods = Array.isArray(site.contactMethods) ? site.contactMethods.slice(0, 3) : [];
+  const sectionIdAttr = sectionId ? ` id="${sectionId}"` : "";
 
   return `
-    <section class="sl-section sl-contact">
+    <section class="sl-section sl-contact"${sectionIdAttr}>
       <div class="container sl-stack sl-stack--loose">
         <section class="sl-contact-panel sl-contact-hero">
           <div class="sl-contact-hero__lead">

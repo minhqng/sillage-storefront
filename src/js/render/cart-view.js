@@ -212,7 +212,7 @@ function renderCartTrust() {
         <div class="sl-cart-trust__icon">${renderTrustGlyph("support")}</div>
         <p class="sl-label sl-muted">Phương thức thanh toán</p>
         <h3>Visa, Mastercard và COD đều được chuẩn bị sẵn cho bước tiếp theo.</h3>
-        <p class="sl-card-copy">Nếu cần chốt quà tặng hoặc xác nhận thời điểm giao, hãy <a href="lien-he.html">liên hệ concierge</a> trước khi đặt.</p>
+        <p class="sl-card-copy">Nếu cần chốt quà tặng hoặc xác nhận thời điểm giao, hãy <a href="cau-hoi-thuong-gap.html#lien-he-tong">liên hệ concierge</a> trước khi đặt.</p>
       </article>
     </section>
   `;
@@ -247,7 +247,7 @@ export function renderCartErrorState() {
             </p>
             <div class="sl-link-row">
               <a class="btn btn-primary" href="cua-hang.html">Về cửa hàng</a>
-              <a class="btn btn-quiet" href="lien-he.html">Liên hệ hỗ trợ</a>
+              <a class="btn btn-quiet" href="cau-hoi-thuong-gap.html#lien-he-tong">Liên hệ hỗ trợ</a>
             </div>
           </div>
         </div>

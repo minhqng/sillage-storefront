@@ -1,5 +1,5 @@
 import { addCartItem } from "../core/cart-store.js";
-import { getProducts, getSite } from "../core/data-store.js";
+import { getGuide, getProducts, getSite } from "../core/data-store.js";
 import { mountPageShell } from "../core/page-shell.js";
 import { getCatalogProducts, getDiscoveryProduct } from "../core/product-service.js";
 import { renderDiscoveryView } from "../render/discovery-view.js";
@@ -72,7 +72,7 @@ function renderDiscoveryErrorState() {
 
 async function initDiscoveryPage() {
   try {
-    const [products, site] = await Promise.all([getProducts(), getSite()]);
+    const [products, site, guide] = await Promise.all([getProducts(), getSite(), getGuide()]);
     const discoveryProduct = getDiscoveryProduct(products);
 
     if (!discoveryProduct) {
@@ -81,29 +81,30 @@ async function initDiscoveryPage() {
 
     mountPageShell({
       currentPage: "discovery",
-      eyebrow: "Bộ Khám Phá",
-      title: "Lần mua đầu tiên an tâm hơn để hiểu bộ sưu tập trên da.",
+      eyebrow: "Bộ Khám Phá & Tư vấn chọn mùi",
+      title: "Thử trên da, rồi chốt chai lớn trên cùng một hành trình rõ ràng.",
       summary:
-        "Bắt đầu với toàn bộ thư viện mùi hương ở định dạng dùng thử, so sánh từng hướng mùi theo thời gian và chỉ chuyển sang chai lớn khi lựa chọn đã đủ rõ.",
+        "Bắt đầu với bộ thử 7 × 2 ml, đọc tư vấn chọn mùi ngay trên trang này, rồi chuyển sang chai lớn khi hướng mùi đã thật sự rõ.",
       content: renderDiscoveryView({
         product: discoveryProduct,
         includedProducts: getIncludedProducts(products, discoveryProduct),
-        site
+        site,
+        guide
       })
     });
 
-    document.title = "Bộ Khám Phá | Sillage";
+    document.title = "Bộ Khám Phá & Tư vấn chọn mùi | Sillage";
     bindDiscoveryActions(discoveryProduct);
   } catch (error) {
     mountPageShell({
       currentPage: "discovery",
-      eyebrow: "Bộ Khám Phá",
-      title: "Lần mua đầu tiên an tâm hơn để hiểu bộ sưu tập trên da.",
+      eyebrow: "Bộ Khám Phá & Tư vấn chọn mùi",
+      title: "Thử trên da, rồi chốt chai lớn trên cùng một hành trình rõ ràng.",
       summary:
-        "Bắt đầu với toàn bộ thư viện mùi hương ở định dạng dùng thử, so sánh từng hướng mùi theo thời gian và chỉ chuyển sang chai lớn khi lựa chọn đã đủ rõ.",
+        "Bắt đầu với bộ thử 7 × 2 ml, đọc tư vấn chọn mùi ngay trên trang này, rồi chuyển sang chai lớn khi hướng mùi đã thật sự rõ.",
       content: renderDiscoveryErrorState()
     });
-    document.title = "Bộ Khám Phá | Sillage";
+    document.title = "Bộ Khám Phá & Tư vấn chọn mùi | Sillage";
     console.error(error);
   }
 }

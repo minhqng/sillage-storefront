@@ -1,5 +1,6 @@
-import { getFaq } from "../core/data-store.js";
+import { getFaq, getSite } from "../core/data-store.js";
 import { mountPageShell } from "../core/page-shell.js";
+import { renderContactView } from "../render/contact-view.js";
 import { renderFaqView } from "../render/faq-view.js";
 
 function renderFaqErrorState() {
@@ -8,13 +9,13 @@ function renderFaqErrorState() {
       <div class="container">
         <div class="sl-empty-state">
           <div class="sl-empty-state__content sl-stack">
-            <p class="sl-label sl-muted">Hỏi đáp tạm thời không khả dụng</p>
-            <h2>Thông tin hỗ trợ đang được cập nhật.</h2>
+            <p class="sl-label sl-muted">Liên hệ tổng tạm thời không khả dụng</p>
+            <h2>Trang hỗ trợ đang được cập nhật dữ liệu.</h2>
             <p class="sl-section-summary">
-              Hãy liên hệ trực tiếp đội ngũ chăm sóc khách hàng, hoặc quay lại cửa hàng để tiếp tục chọn mùi hương.
+              Hãy thử tải lại trang sau ít phút, hoặc quay lại cửa hàng để tiếp tục chọn mùi hương trong lúc chờ.
             </p>
             <div class="sl-link-row">
-              <a class="btn btn-primary" href="lien-he.html">Liên hệ chăm sóc khách hàng</a>
+              <a class="btn btn-primary" href="mailto:minhnq@gdscptit.dev">Gửi email chăm sóc khách hàng</a>
               <a class="btn btn-secondary" href="cua-hang.html">Mở cửa hàng</a>
             </div>
           </div>
@@ -26,31 +27,32 @@ function renderFaqErrorState() {
 
 async function initFaqPage() {
   try {
-    const faq = await getFaq();
+    const [faq, site] = await Promise.all([getFaq(), getSite()]);
 
     mountPageShell({
       currentPage: "faq",
-      eyebrow: "Câu hỏi thường gặp",
-      title: "Giao hàng, Bộ Khám Phá, đổi trả và thanh toán, tất cả trong một nơi.",
+      eyebrow: "Liên hệ tổng",
+      title: "Liên hệ, hỗ trợ đơn hàng và câu hỏi thường gặp trong một trang duy nhất.",
       summary:
-        "Tìm chi tiết thực tế về thời gian xử lý đơn, trải nghiệm bộ thử, đổi trả chai chưa mở và các bước từ giỏ hàng đến xác nhận đơn.",
-      content: renderFaqView({
-        faqGroups: faq.groups ?? []
-      })
+        "Xem kênh chăm sóc khách hàng, phạm vi hỗ trợ và toàn bộ câu trả lời về giao hàng, Bộ Khám Phá, đổi trả và thanh toán tại cùng một nơi.",
+      content: `
+        ${renderContactView({ site, sectionId: "lien-he-tong" })}
+        ${renderFaqView({ faqGroups: faq.groups ?? [], showContactCta: false })}
+      `
     });
   } catch (error) {
     mountPageShell({
       currentPage: "faq",
-      eyebrow: "Câu hỏi thường gặp",
-      title: "Giao hàng, Bộ Khám Phá, đổi trả và thanh toán, tất cả trong một nơi.",
+      eyebrow: "Liên hệ tổng",
+      title: "Liên hệ, hỗ trợ đơn hàng và câu hỏi thường gặp trong một trang duy nhất.",
       summary:
-        "Tìm chi tiết thực tế về thời gian xử lý đơn, trải nghiệm bộ thử, đổi trả chai chưa mở và các bước từ giỏ hàng đến xác nhận đơn.",
+        "Xem kênh chăm sóc khách hàng, phạm vi hỗ trợ và toàn bộ câu trả lời về giao hàng, Bộ Khám Phá, đổi trả và thanh toán tại cùng một nơi.",
       content: renderFaqErrorState()
     });
     console.error(error);
   }
 
-  document.title = "Câu hỏi thường gặp | Sillage";
+  document.title = "Liên hệ tổng | Sillage";
 }
 
 initFaqPage();

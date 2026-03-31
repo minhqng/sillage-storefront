@@ -11,11 +11,11 @@ function renderHomeErrorState() {
             <p class="sl-label sl-muted">Bộ sưu tập tạm thời không khả dụng</p>
             <h2>Bộ sưu tập đang được cập nhật.</h2>
             <p class="sl-section-summary">
-              Hãy mở hướng dẫn mùi hương trong lúc chờ, hoặc quay lại sau ít phút để tiếp tục thu hẹp lựa chọn.
+              Hãy mở phần tư vấn chọn mùi trong Bộ Khám Phá trong lúc chờ, hoặc quay lại sau ít phút để tiếp tục thu hẹp lựa chọn.
             </p>
             <div class="sl-link-row">
               <a class="btn btn-primary" href="cua-hang.html">Mở cửa hàng</a>
-              <a class="btn btn-quiet" href="huong-dan-mui-huong.html">Đọc hướng dẫn mùi hương</a>
+              <a class="btn btn-quiet" href="bo-kham-pha.html#tu-van-chon-mui">Xem tư vấn chọn mùi</a>
             </div>
           </div>
         </div>

@@ -1,8 +1,7 @@
 const primaryNav = [
   { href: "cua-hang.html", label: "Cửa hàng", key: "shop" },
   { href: "bo-kham-pha.html", label: "Bộ Khám Phá", key: "discovery" },
-  { href: "huong-dan-mui-huong.html", label: "Hướng dẫn", key: "guide" },
-  { href: "cau-hoi-thuong-gap.html", label: "Hỏi đáp", key: "faq" }
+  { href: "cau-hoi-thuong-gap.html", label: "Liên hệ tổng", key: "faq" }
 ];
 
 function resolveNavPage(currentPage) {
