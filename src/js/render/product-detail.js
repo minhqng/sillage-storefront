@@ -158,7 +158,7 @@ function renderTrustCards(product) {
     {
       eyebrow: "Tư vấn trước khi đặt",
       title: "Cần chốt quà tặng hoặc dung tích phù hợp?",
-      copy: "Đội ngũ concierge có thể hỗ trợ chọn chai cho quà tặng, xác nhận thời điểm giao hoặc gợi ý cách bắt đầu an toàn hơn nếu đây là lần mua đầu.",
+      copy: "Đội ngũ có thể hỗ trợ chọn chai cho quà tặng, xác nhận thời điểm giao hoặc gợi ý cách bắt đầu an toàn hơn nếu đây là lần mua đầu.",
       glyph: "support"
     }
   ];

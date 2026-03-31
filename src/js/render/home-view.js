@@ -178,7 +178,7 @@ export function renderHomeView({ products }) {
               <p class="sl-home-hero-note__text">
                 Cần chốt quà tặng hoặc giao hàng?
               </p>
-              <a class="btn btn-quiet sl-home-hero-note__link" href="cau-hoi-thuong-gap.html#lien-he-tong">Liên hệ concierge</a>
+              <a class="btn btn-quiet sl-home-hero-note__link" href="cau-hoi-thuong-gap.html#lien-he-tong">Liên hệ</a>
             </div>
           </aside>
         </div>
