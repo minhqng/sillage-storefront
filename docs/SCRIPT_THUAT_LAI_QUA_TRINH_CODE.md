@@ -1,0 +1,47 @@
+# SCRIPT THUẬT LẠI QUÁ TRÌNH CODE
+
+Tài liệu này viết theo ngôi thứ nhất, để kể lại quá trình build với giọng tự nhiên khi bảo vệ. Nội dung bám theo runtime hiện tại và git history đang còn trong repo.
+
+## Bản 1 phút
+
+Em build dự án này theo đúng hướng static multi-page ngay từ đầu. Việc đầu tiên em chốt `package.json` và `vite.config.js` để Vite build nhiều file HTML riêng như `index.html`, `cua-hang.html`, `chi-tiet-san-pham.html`, `gio-hang.html`, `thanh-toan.html`. Em làm vậy vì đề bài yêu cầu multi-page thật, không phải SPA giả lập.
+
+Sau đó em tách dữ liệu ra JSON, trong đó `src/data/products.json` là file trung tâm. Từ file này em viết `src/js/core/product-service.js` để Home, Shop và Product Detail cùng dùng một logic sản phẩm. Khi data ổn rồi, em dựng shared shell bằng `app-shell.js`, `page-shell.js`, `header.js`, `footer.js`, rồi mới làm lần lượt Home, Shop, Product Detail.
+
+Sau khi flow sản phẩm chạy ổn, em thêm `src/js/core/cart-store.js` để lưu giỏ hàng bằng `localStorage`, rồi thêm Checkout qua `src/js/core/checkout-service.js`. Cuối cùng em mới phủ hệ CSS premium và có một vòng refactor nội dung, cụ thể là gộp Guide vào Discovery và gộp Contact vào FAQ, nhưng vẫn giữ route cũ bằng redirect để không gãy link.
+
+## Bản 3 phút
+
+Nếu em kể theo đúng thứ tự em build thì bước đầu tiên là dựng nền toolchain. Em chốt stack ở `package.json`, sau đó cấu hình `vite.config.js` theo kiểu MPA bằng `rollupOptions.input`. Lý do là em muốn mỗi route public là một file HTML thật, ví dụ `index.html`, `cua-hang.html`, `chi-tiet-san-pham.html`, `bo-kham-pha.html`, `gio-hang.html`, `thanh-toan.html`. Làm vậy thì site đúng bản chất static multi-page, không cần backend và không cần client router kiểu framework.
+
+Bước tiếp theo em chưa làm UI ngay, mà em chốt data contract trước. Em tạo `src/data/products.json` làm nguồn dữ liệu trung tâm cho toàn bộ phần thương mại. Ngoài ra em có `src/data/site.json`, `src/data/guide.json`, `src/data/faq.json` cho content dùng chung. Sau đó em viết `src/js/core/product-service.js`, `src/js/core/data-store.js`, `src/js/core/query-state.js`, `src/js/core/filter-state.js`, `src/js/core/sort-state.js`. Mục tiêu của em là tách dữ liệu và nghiệp vụ ra khỏi view, để Home, Shop, Product Detail không tự hardcode logic riêng.
+
+Khi có data layer rồi thì em dựng shared shell. Em làm `src/js/core/app-shell.js`, `src/js/core/page-shell.js`, rồi `src/js/render/header.js`, `src/js/render/footer.js`, `src/js/render/page-intro.js`. Em chọn làm shell sớm vì tất cả page đều cần header/footer giống nhau, active nav giống nhau, và sau này cart badge cũng cần xuất hiện xuyên suốt.
+
+Sau đó em build flow chính theo dependency tự nhiên. Em làm Home trước bằng `src/js/entries/home.js` và `src/js/render/home-view.js` để kiểm tra shell, product card và brand storytelling. Có Home rồi em mới làm Shop bằng `src/js/entries/shop.js`, `src/js/render/shop-view.js`, `src/js/render/product-card.js`, `src/js/render/product-grid.js`. Sau Shop em mới làm Product Detail bằng `src/js/entries/product.js` và `src/js/render/product-detail.js`, vì trang đó phụ thuộc vào slug trên URL và phải lookup sản phẩm đúng từ `products.json`.
+
+Lúc này flow sản phẩm đã ổn thì em mới thêm Cart. Em dùng `src/js/core/cart-store.js` để lưu giỏ hàng vào `localStorage`, nhờ vậy reload không mất dữ liệu. Rồi em làm `src/js/entries/cart.js` và `src/js/render/cart-view.js`. Sau Cart em thêm Checkout bằng `src/js/core/checkout-service.js`, `src/js/entries/checkout.js`, `src/js/render/checkout-view.js`. Checkout này là static checkout đúng theo phạm vi đề bài, nghĩa là không có backend xử lý đơn thật nhưng vẫn có summary và form đầy đủ.
+
+Sau khi các flow chạy được, em mới phủ visual system bằng `src/styles/tokens.css`, `src/styles/bootstrap-overrides.css`, `src/styles/main.css` và các file trong `src/styles/components/`. Sau đó repo có một đợt refactor nội dung: Guide page được nhập vào Discovery, Contact page được nhập vào FAQ hub. Hiện tại `huong-dan-mui-huong.html` và `lien-he.html` vẫn còn nhưng chỉ để redirect. Em giữ route cũ như vậy để không gãy link, nhưng runtime chính thì đã được thu gọn lại.
+
+## Bản 5 phút
+
+Nếu em kể kỹ hơn như một nhật ký build thì em bắt đầu từ chỗ xác định dự án này phải là một storefront tĩnh nhiều trang, không có backend, không có database, nhưng vẫn phải có cảm giác như một ecommerce thật. Vì vậy bước đầu tiên của em là không để kiến trúc bị trôi sang SPA. Em tạo `package.json` để chốt stack Vite và Bootstrap 5.3.x, rồi cấu hình `vite.config.js` theo MPA. Chỗ này rất quan trọng vì em dùng `rollupOptions.input` để nói rõ với Vite là repo có nhiều route HTML riêng. Điều đó quyết định toàn bộ phần sau.
+
+Sau khi có nền build rồi, em tạo các file route mỏng như `index.html`, `cua-hang.html`, `chi-tiet-san-pham.html`, `bo-kham-pha.html`, `gio-hang.html`, `thanh-toan.html`, `cau-hoi-thuong-gap.html`. Em cố tình giữ HTML rất mỏng, chỉ làm nhiệm vụ route shell và mount entry JS. Em không muốn logic bị rải vào HTML vì như vậy sau này sẽ khó maintain và khó giải thích kiến trúc.
+
+Ở bước tiếp theo em chốt dữ liệu trước, vì em nghĩ storefront kiểu này mà không có data contract ổn từ đầu thì càng làm UI về sau càng vỡ. Em tạo `src/data/products.json` làm source of truth cho catalog. Đây là file quan trọng nhất vì Home, Shop, Product Detail, Discovery, Cart, thậm chí cả Checkout đều cần ít nhất một phần dữ liệu từ đây. Ngoài ra em tạo `src/data/site.json` để gom brand copy, nav và footer content; `src/data/guide.json` cho phần tư vấn chọn mùi; `src/data/faq.json` cho FAQ. Sau đó em viết `src/js/core/product-service.js` để toàn bộ logic sản phẩm tập trung ở một nơi, ví dụ lookup theo slug, lấy related products, xử lý size, build href. Đồng thời em có `src/js/core/data-store.js` để nạp các JSON còn lại, và có thêm `query-state.js`, `filter-state.js`, `sort-state.js` để chuẩn hóa state theo URL.
+
+Khi data layer đã rõ, em mới dựng shared shell. Em làm `src/js/core/app-shell.js` và `src/js/core/page-shell.js`, rồi viết `src/js/render/header.js`, `src/js/render/footer.js`, `src/js/render/page-intro.js`. Em làm vậy vì em biết nếu mỗi page tự dựng header/footer thì càng về sau càng khó đồng bộ route, CTA, cart badge và copy. Shared shell giúp tất cả page nhìn như cùng một hệ thống ngay từ đầu.
+
+Sau đó em bắt đầu build flow người dùng. Em làm Home trước bằng `src/js/entries/home.js` và `src/js/render/home-view.js`. Lý do là Home là nơi tốt nhất để kiểm tra cùng lúc nhiều thứ: shell có chạy chưa, product card có dùng được chưa, `site.json` có đổ content đúng chưa, cảm giác premium có bắt đầu hình thành chưa. Khi Home ổn, em tách card ra thành `src/js/render/product-card.js` và `src/js/render/product-grid.js`, rồi dùng lại cho Shop qua `src/js/entries/shop.js` và `src/js/render/shop-view.js`. Ở Shop em xử lý filter, sort và query string vì em muốn reload trang hoặc copy URL vẫn giữ được trạng thái chọn lọc.
+
+Có Shop rồi thì em mới làm Product Detail. Em tạo `src/js/entries/product.js` và `src/js/render/product-detail.js`, cộng thêm `src/js/render/related-products.js`. Chỗ này em phải dựa vào `san-pham` trên URL để gọi `getProductBySlug()` trong `product-service.js`. Em coi đây là một điểm kiến trúc quan trọng, vì static site không có backend router nên nếu không xử lý slug/query param kỹ thì PDP sẽ không ổn định.
+
+Sau khi flow sản phẩm chính chạy được, em làm Discovery và các page hỗ trợ. Evidence trong repo hiện cho thấy Discovery và Guide ban đầu là hai page riêng, tương tự FAQ và Contact cũng từng là hai page riêng. Điều đó hợp lý vì ở giai đoạn đầu em có thể muốn tách nội dung cho dễ ship. Nhưng về sau em refactor lại information architecture: Guide được nhập vào Discovery, Contact được nhập vào FAQ hub. Hiện tại hai route `huong-dan-mui-huong.html` và `lien-he.html` chỉ còn làm redirect, còn runtime chính nằm ở `bo-kham-pha.html` và `cau-hoi-thuong-gap.html`. Em giữ route cũ vì muốn backward compatible với link cũ và footer cũ.
+
+Lúc này mới đến Cart và Checkout. Em không làm phần này sớm hơn vì cart phụ thuộc product identity phải ổn định trước. Em viết `src/js/core/cart-store.js` để quản lý line items và lưu bằng `localStorage`. Sau đó em dựng `src/js/entries/cart.js` và `src/js/render/cart-view.js`. Khi cart đã có source of truth riêng, em mới thêm `src/js/core/checkout-service.js`, `src/js/entries/checkout.js`, `src/js/render/checkout-view.js`. Em tách checkout-service ra khỏi view để phần tính subtotal, shipping, total và success state không nằm lẫn trong UI code.
+
+Chỉ sau khi tất cả flow chính chạy được, em mới quay lại phần visual system. Em thêm `src/styles/tokens.css`, `src/styles/bootstrap-overrides.css`, `src/styles/utilities.css`, `src/styles/main.css` và các file trong `src/styles/components/`. Em làm như vậy vì em muốn kiến trúc và flow chạy được trước, rồi mới premium hóa Bootstrap thành một visual identity riêng. Ở cuối vòng đời repo còn có một vòng cleanup wording và xóa asset thừa, cho thấy phần kỹ thuật chính đã xong rồi mới quay lại dọn consistency.
+
+Nếu thầy hỏi về điểm cần nói thật, em sẽ nói luôn là trong repo có một số tài liệu cũ còn nhắc route tiếng Anh hoặc About page. Nhưng runtime hiện tại và git history còn lưu chỉ xác nhận chắc MPA tiếng Việt, xác nhận việc gộp Guide và Contact, còn chuyện About page từng tồn tại như route thật thì repo hiện không chứng minh được. Em sẽ tách rõ cái nào là evidence xác nhận được và cái nào chỉ là dấu vết của tài liệu cũ.
