@@ -43,7 +43,7 @@ The website must feel commercial, premium, and realistic — never like a defaul
 
 ## Working style
 - For difficult tasks, plan first
-- Before large implementation, create or update PLANS.md
+- Before large implementation, create or update `docs/PLANS.md`
 - For every implementation phase, report:
   1. files changed
   2. rationale
@@ -54,7 +54,7 @@ The website must feel commercial, premium, and realistic — never like a defaul
 - Reviews must prioritize bugs, regressions, brittle logic, maintainability, responsiveness, and perceived product quality
 - Reviews should be severity-ranked
 - Reviews must propose exact fixes
-- Follow code_review.md during review
+- Follow `docs/code_review.md` during review
 
 ## Definition of done
 A feature is done only when:
@@ -62,4 +62,4 @@ A feature is done only when:
 - browser behavior is manually verifiable
 - responsive behavior is acceptable
 - no obvious console errors appear
-- the result aligns with PROJECT_BRIEF.md and DESIGN_SYSTEM.md
+- the result aligns with `docs/PROJECT_BRIEF.md` and `docs/DESIGN_SYSTEM.md`

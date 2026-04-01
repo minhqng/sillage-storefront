@@ -157,7 +157,7 @@ Repo hiện tại có thể đọc như sau:
 - `src/styles/`: chứa giao diện. Đây là lớp styling.
 - `dist/`: build output, không phải source of truth.
 - `tests/`: đang trống, nghĩa là dự án hiện tại gần như dựa vào manual verification.
-- Tài liệu root như `AGENTS.md`, `PROJECT_BRIEF.md`, `DESIGN_SYSTEM.md`, `PLANS.md`, `code_review.md`, `DEFENSE_NOTES.md`: ảnh hưởng mạnh tới định hướng kiến trúc và cách giải thích đồ án, dù không chạy trực tiếp trên browser.
+- Tài liệu dự án như `AGENTS.md`, `docs/PROJECT_BRIEF.md`, `docs/DESIGN_SYSTEM.md`, `docs/PLANS.md`, `docs/code_review.md`, `docs/DEFENSE_NOTES.md`: ảnh hưởng mạnh tới định hướng kiến trúc và cách giải thích đồ án, dù không chạy trực tiếp trên browser.
 
 Giải thích từng vùng quan trọng:
 
@@ -1702,9 +1702,9 @@ Cần học thêm:
 - [src/js/core/app-shell.js](D:/MyProfile/Documents/PTIT/sillage-storefront/src/js/core/app-shell.js)
 - toàn bộ `render/`
 - toàn bộ CSS component files
-- [PROJECT_BRIEF.md](D:/MyProfile/Documents/PTIT/sillage-storefront/PROJECT_BRIEF.md)
-- [DESIGN_SYSTEM.md](D:/MyProfile/Documents/PTIT/sillage-storefront/DESIGN_SYSTEM.md)
-- [PLANS.md](D:/MyProfile/Documents/PTIT/sillage-storefront/PLANS.md)
+- [PROJECT_BRIEF.md](D:/MyProfile/Documents/PTIT/sillage-storefront/docs/PROJECT_BRIEF.md)
+- [DESIGN_SYSTEM.md](D:/MyProfile/Documents/PTIT/sillage-storefront/docs/DESIGN_SYSTEM.md)
+- [PLANS.md](D:/MyProfile/Documents/PTIT/sillage-storefront/docs/PLANS.md)
 
 Cần hiểu:
 - kiến trúc nhiều tầng
