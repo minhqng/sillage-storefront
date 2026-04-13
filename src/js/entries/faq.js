@@ -1,3 +1,4 @@
+import { Collapse } from "bootstrap";
 import { getFaq, getSite } from "../core/data-store.js";
 import { mountPageShell } from "../core/page-shell.js";
 import { renderContactView } from "../render/contact-view.js";
@@ -25,6 +26,38 @@ function renderFaqErrorState() {
   `;
 }
 
+function bindFaqAccordions() {
+  document.querySelectorAll(".sl-faq-accordion").forEach((accordionRoot) => {
+    accordionRoot.querySelectorAll(".accordion-collapse").forEach((collapseNode) => {
+      Collapse.getOrCreateInstance(collapseNode, {
+        parent: accordionRoot,
+        toggle: false
+      });
+    });
+
+    accordionRoot.querySelectorAll("[data-faq-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetSelector = button.getAttribute("data-bs-target");
+
+        if (!targetSelector) {
+          return;
+        }
+
+        const collapseNode = accordionRoot.querySelector(targetSelector);
+
+        if (!(collapseNode instanceof HTMLElement)) {
+          return;
+        }
+
+        Collapse.getOrCreateInstance(collapseNode, {
+          parent: accordionRoot,
+          toggle: false
+        }).toggle();
+      });
+    });
+  });
+}
+
 async function initFaqPage() {
   try {
     const [faq, site] = await Promise.all([getFaq(), getSite()]);
@@ -40,6 +73,7 @@ async function initFaqPage() {
         ${renderFaqView({ faqGroups: faq.groups ?? [], showContactCta: false })}
       `
     });
+    bindFaqAccordions();
   } catch (error) {
     mountPageShell({
       currentPage: "faq",

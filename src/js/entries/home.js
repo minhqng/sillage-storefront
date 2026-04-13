@@ -1,3 +1,4 @@
+import { Carousel } from "bootstrap";
 import { getProducts } from "../core/data-store.js";
 import { mountPageShell } from "../core/page-shell.js";
 import { renderHomeView } from "../render/home-view.js";
@@ -24,6 +25,21 @@ function renderHomeErrorState() {
   `;
 }
 
+function bindHomeCarousel() {
+  const carouselNode = document.querySelector("[data-home-carousel]");
+
+  if (!(carouselNode instanceof HTMLElement)) {
+    return;
+  }
+
+  Carousel.getOrCreateInstance(carouselNode, {
+    interval: false,
+    ride: false,
+    touch: true,
+    wrap: true
+  });
+}
+
 async function initHomePage() {
   try {
     const products = await getProducts();
@@ -37,6 +53,7 @@ async function initHomePage() {
       includePageIntro: false,
       content: renderHomeView({ products })
     });
+    bindHomeCarousel();
   } catch (error) {
     mountPageShell({
       currentPage: "home",

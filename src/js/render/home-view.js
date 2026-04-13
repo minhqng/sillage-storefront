@@ -5,7 +5,7 @@ import { renderEditorialArtwork, renderProductArtwork } from "./media-art.js";
 
 function renderFeaturedCard(product) {
   return `
-    <article class="sl-home-product-card">
+    <article class="card sl-home-product-card">
       <a class="sl-home-product-link" href="${getProductHref(product)}">
         <div class="sl-home-product-media">
           ${renderProductArtwork(product, {
@@ -14,7 +14,7 @@ function renderFeaturedCard(product) {
             sizes: "(min-width: 1200px) 22vw, (min-width: 768px) 30vw, 100vw"
           })}
         </div>
-        <div class="sl-home-product-body sl-stack sl-stack--tight">
+        <div class="card-body sl-home-product-body sl-stack sl-stack--tight">
           <div class="sl-home-product-meta">
             <p class="sl-label sl-muted">${escapeHtml(formatFamilyLabel(product.family))}</p>
             <p class="sl-home-product-price">${formatPrice(product.price)}</p>
@@ -79,25 +79,143 @@ function renderHeroMedia(product) {
   `;
 }
 
-function renderEditorialBand() {
+function renderCarouselSlide(
+  {
+    eyebrow,
+    title,
+    copy,
+    primaryHref,
+    primaryLabel,
+    secondaryHref,
+    secondaryLabel,
+    mediaMarkup
+  },
+  index
+) {
   return `
-    <section class="sl-home-editorial-band" aria-label="Khoảnh khắc biên tập của nhà hương">
-      <div class="sl-home-editorial-band__media">
-        ${renderEditorialArtwork(
-          "/images/editorial/hero-banner.png",
-          "Bộ ba chai nước hoa trong ánh sáng studio ấm",
-          "sl-home-editorial-band__art",
-          "sl-home-editorial-band__image"
-        )}
-      </div>
-      <div class="sl-home-editorial-band__overlay">
-        <div class="container">
-          <div class="sl-home-editorial-band__copy sl-stack sl-stack--tight">
-            <p class="sl-label">Nhịp điệu biên tập</p>
-            <h2>Ánh sáng, thủy tinh và khoảng lặng được giữ cùng một nhịp.</h2>
-            <p class="sl-card-copy">
-              Những bề mặt đá, gỗ và vải thô được chen vào giữa, một thương hiệu đang kể chuyện bằng hình ảnh thật.
-            </p>
+    <div class="carousel-item${index === 0 ? " active" : ""}">
+      <article class="sl-home-carousel-slide">
+        <div class="sl-home-carousel-slide__media">
+          ${mediaMarkup}
+        </div>
+        <div class="sl-home-carousel-slide__copy sl-stack sl-stack--tight">
+          <p class="sl-label sl-muted">${eyebrow}</p>
+          <h2>${title}</h2>
+          <p class="sl-card-copy">${copy}</p>
+          <div class="sl-link-row">
+            <a class="btn btn-primary" href="${primaryHref}">${primaryLabel}</a>
+            <a class="btn btn-secondary" href="${secondaryHref}">${secondaryLabel}</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  `;
+}
+
+function renderShowcaseCarousel({ heroProduct, discoveryProduct }) {
+  const slides = [];
+
+  if (heroProduct) {
+    slides.push({
+      eyebrow: "Bootstrap Carousel · Best seller",
+      title: `${heroProduct.name} đang là lựa chọn mở đầu rõ ràng nhất.`,
+      copy: `${heroProduct.tagline} Đây là slide sản phẩm nổi bật để điều hướng nhanh từ trang chủ vào trang chi tiết.`,
+      primaryHref: getProductHref(heroProduct),
+      primaryLabel: "Xem chai nổi bật",
+      secondaryHref: "cua-hang.html",
+      secondaryLabel: "Mở cửa hàng",
+      mediaMarkup: renderProductArtwork(heroProduct, {
+        className: "sl-home-carousel-slide__art",
+        imageClassName: "sl-home-carousel-slide__image",
+        alt: `Chai nước hoa ${heroProduct.name}`,
+        sizes: "(min-width: 992px) 38vw, 100vw"
+      })
+    });
+  }
+
+  if (discoveryProduct) {
+    slides.push({
+      eyebrow: "Bootstrap Carousel · Entry path",
+      title: "Bộ Khám Phá là lối vào an toàn khi bạn chưa muốn chốt chai lớn ngay.",
+      copy: discoveryProduct.shortDescription,
+      primaryHref: "bo-kham-pha.html",
+      primaryLabel: "Xem Bộ Khám Phá",
+      secondaryHref: "huong-dan-mui-huong.html",
+      secondaryLabel: "Đọc hướng dẫn",
+      mediaMarkup: renderProductArtwork(discoveryProduct, {
+        className: "sl-home-carousel-slide__art",
+        imageClassName: "sl-home-carousel-slide__image",
+        alt: `${discoveryProduct.name} dạng bộ thử`,
+        sizes: "(min-width: 992px) 38vw, 100vw"
+      })
+    });
+  }
+
+  slides.push({
+    eyebrow: "Bootstrap Carousel · Editorial",
+    title: "Trang chủ vẫn giữ chất company page nhưng cho thấy rõ component Carousel của Bootstrap.",
+    copy: "Slide cuối cùng dùng visual editorial để giữ nhịp thương hiệu, đồng thời thể hiện khả năng điều hướng bằng indicator, control và cấu trúc slide chuẩn.",
+    primaryHref: "huong-dan-mui-huong.html",
+    primaryLabel: "Tư vấn chọn mùi",
+    secondaryHref: "cau-hoi-thuong-gap.html",
+    secondaryLabel: "Xem hỗ trợ",
+    mediaMarkup: renderEditorialArtwork(
+      "/images/editorial/hero-banner.png",
+      "Bộ ba chai nước hoa trong ánh sáng studio ấm",
+      "sl-home-carousel-slide__art",
+      "sl-home-carousel-slide__image"
+    )
+  });
+
+  return `
+    <section class="sl-section sl-home-carousel-section sl-divider-top" aria-label="Điểm nhấn Bootstrap carousel">
+      <div class="container">
+        <div
+          id="sl-home-showcase"
+          class="carousel slide sl-home-carousel"
+          data-home-carousel
+          aria-label="Bộ sưu tập nổi bật"
+        >
+          <div class="carousel-indicators sl-home-carousel__indicators">
+            ${slides
+              .map(
+                (_, index) => `
+                  <button
+                    type="button"
+                    class="${index === 0 ? "active" : ""}"
+                    aria-current="${index === 0 ? "true" : "false"}"
+                    aria-label="Đến slide ${index + 1}"
+                    data-bs-target="#sl-home-showcase"
+                    data-bs-slide-to="${index}"
+                  ></button>
+                `
+              )
+              .join("")}
+          </div>
+
+          <div class="carousel-inner">
+            ${slides.map((slide, index) => renderCarouselSlide(slide, index)).join("")}
+          </div>
+
+          <div class="sl-home-carousel__controls">
+            <button
+              class="carousel-control-prev sl-home-carousel__control"
+              type="button"
+              data-bs-target="#sl-home-showcase"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Slide trước</span>
+            </button>
+            <button
+              class="carousel-control-next sl-home-carousel__control"
+              type="button"
+              data-bs-target="#sl-home-showcase"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Slide sau</span>
+            </button>
           </div>
         </div>
       </div>
@@ -200,7 +318,7 @@ export function renderHomeView({ products }) {
       </div>
     </section>
 
-    ${renderEditorialBand()}
+    ${renderShowcaseCarousel({ heroProduct, discoveryProduct })}
 
     <section class="sl-section sl-section--surface sl-divider-top sl-home-trust">
       <div class="container">

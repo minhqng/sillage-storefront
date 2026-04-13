@@ -7,7 +7,7 @@ export function renderProductCard(product, { allowQuickAdd = false } = {}) {
   const defaultSize = allowQuickAdd ? getDefaultProductSize(product) : null;
 
   return `
-    <article class="sl-product-card${allowQuickAdd && defaultSize ? " sl-product-card--quick-add" : ""}">
+    <article class="card sl-product-card${allowQuickAdd && defaultSize ? " sl-product-card--quick-add" : ""}">
       <a class="sl-product-card__link" href="${getProductHref(product)}">
         <div class="sl-product-card__media">
           ${renderProductArtwork(product, {
@@ -16,7 +16,7 @@ export function renderProductCard(product, { allowQuickAdd = false } = {}) {
             sizes: "(min-width: 992px) 24vw, (min-width: 768px) 40vw, 100vw"
           })}
         </div>
-        <div class="sl-product-card__body sl-stack sl-stack--tight">
+        <div class="card-body sl-product-card__body sl-stack sl-stack--tight">
           <div class="sl-product-card__header">
             <p class="sl-product-card__family sl-label sl-muted">${escapeHtml(formatFamilyLabel(product.family))}</p>
             <p class="sl-product-card__price">${formatPrice(product.price)}</p>
@@ -28,7 +28,7 @@ export function renderProductCard(product, { allowQuickAdd = false } = {}) {
       ${
         allowQuickAdd && defaultSize
           ? `
-            <div class="sl-product-card__actions">
+            <div class="card-footer sl-product-card__actions">
               <button
                 class="btn btn-secondary sl-product-card__quick-add"
                 type="button"

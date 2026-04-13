@@ -7,6 +7,11 @@
   padding-top: var(--sl-space-5);
 }
 
+.sl-product-card.card {
+  background: transparent;
+  border: 0;
+}
+
 .sl-product-card__link {
   display: grid;
   gap: var(--sl-space-4);
@@ -39,6 +44,10 @@
   gap: var(--sl-space-2);
 }
 
+.sl-product-card__body.card-body {
+  padding: 0;
+}
+
 .sl-product-card__header {
   display: flex;
   gap: var(--sl-space-3);
@@ -64,6 +73,12 @@
 
 .sl-product-card__actions {
   display: grid;
+}
+
+.sl-product-card__actions.card-footer {
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .sl-product-card__quick-add {

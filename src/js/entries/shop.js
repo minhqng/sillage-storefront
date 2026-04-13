@@ -1,3 +1,4 @@
+import { Offcanvas, Toast } from "bootstrap";
 import { addCartItem } from "../core/cart-store.js";
 import { getProducts } from "../core/data-store.js";
 import {
@@ -64,36 +65,17 @@ function applyShopState(products, { selectedFamily, selectedOccasion, selectedSo
 
 function showQuickAddToast(root, message) {
   const toastNode = root.querySelector("[data-shop-toast]");
+  const toastBody = root.querySelector("[data-shop-toast-body]");
 
-  if (!(toastNode instanceof HTMLElement)) {
+  if (!(toastNode instanceof HTMLElement) || !(toastBody instanceof HTMLElement)) {
     return;
   }
 
-  if (toastNode.dataset.showTimeoutId) {
-    window.clearTimeout(Number(toastNode.dataset.showTimeoutId));
-  }
-
-  if (toastNode.dataset.hideTimeoutId) {
-    window.clearTimeout(Number(toastNode.dataset.hideTimeoutId));
-  }
-
-  toastNode.textContent = message;
-  toastNode.hidden = false;
-  toastNode.classList.add("is-visible");
-
-  const showTimeoutId = window.setTimeout(() => {
-    toastNode.classList.remove("is-visible");
-
-    const hideTimeoutId = window.setTimeout(() => {
-      toastNode.hidden = true;
-      delete toastNode.dataset.showTimeoutId;
-      delete toastNode.dataset.hideTimeoutId;
-    }, 220);
-
-    toastNode.dataset.hideTimeoutId = String(hideTimeoutId);
-  }, 1800);
-
-  toastNode.dataset.showTimeoutId = String(showTimeoutId);
+  toastBody.textContent = message;
+  Toast.getOrCreateInstance(toastNode, {
+    autohide: true,
+    delay: 2200
+  }).show();
 }
 
 function pulseQuickAddButton(button) {
@@ -113,6 +95,43 @@ function pulseQuickAddButton(button) {
   }, 1400);
 
   button.dataset.pulseTimeoutId = String(pulseTimeoutId);
+}
+
+function bindShopBootstrap(root) {
+  const offcanvasNode = root.querySelector("[data-shop-offcanvas]");
+
+  if (offcanvasNode instanceof HTMLElement) {
+    const offcanvas = Offcanvas.getOrCreateInstance(offcanvasNode, {
+      scroll: false,
+      backdrop: true
+    });
+
+    root.querySelectorAll("[data-shop-open-filters]").forEach((button) => {
+      button.addEventListener("click", () => {
+        offcanvas.show();
+      });
+    });
+
+    root.querySelectorAll("[data-shop-close-filters]").forEach((button) => {
+      button.addEventListener("click", () => {
+        offcanvas.hide();
+      });
+    });
+  }
+
+  const toastNode = root.querySelector("[data-shop-toast]");
+  const toastCloseButton = root.querySelector("[data-shop-toast-close]");
+
+  if (toastNode instanceof HTMLElement && toastCloseButton instanceof HTMLButtonElement) {
+    const toast = Toast.getOrCreateInstance(toastNode, {
+      autohide: true,
+      delay: 2200
+    });
+
+    toastCloseButton.addEventListener("click", () => {
+      toast.hide();
+    });
+  }
 }
 
 function mountShopResults(root, products, state) {
@@ -182,6 +201,7 @@ async function initShopPage() {
       throw new Error("Missing hydrated shop root.");
     }
 
+    bindShopBootstrap(hydratedRoot);
     syncShopControls(hydratedRoot, state);
     mountShopResults(hydratedRoot, products, state);
 

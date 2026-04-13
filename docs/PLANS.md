@@ -25,6 +25,70 @@
 - Manual verification steps
 - Status
 
+## Bootstrap Showcase Remediation
+- Objective: Làm storefront thể hiện Bootstrap rõ hơn cho bài tập lớn bằng cách bổ sung các component dễ nhận ra trong bối cảnh thương mại hiện có: Carousel ở Home, Offcanvas filter sidebar và Toast ở Shop, Accordion ở FAQ, đồng thời chuyển các product card chính sang cấu trúc Bootstrap `card` nhưng vẫn giữ visual premium của brand.
+- Files to create or modify:
+  - `docs/PLANS.md`
+  - `src/js/entries/home.js`
+  - `src/js/entries/shop.js`
+  - `src/js/entries/faq.js`
+  - `src/js/render/home-view.js`
+  - `src/js/render/shop-view.js`
+  - `src/js/render/faq-view.js`
+  - `src/js/render/product-card.js`
+  - `src/styles/components/home.css`
+  - `src/styles/components/shop.css`
+  - `src/styles/components/support-pages.css`
+  - `src/styles/components/product-card.css`
+- Dependencies:
+  - `AGENTS.md`
+  - `docs/PROJECT_BRIEF.md`
+  - `docs/DESIGN_SYSTEM.md`
+  - Existing shared shell, product data flow, and component styling
+- Risks:
+  - Bootstrap components có thể phá nhịp premium hiện tại nếu áp dụng quá "demo-like"
+  - Offcanvas, Carousel, Toast, và Accordion cần JS khởi tạo thủ công vì project đang import component Bootstrap theo module, không dùng bundle data API toàn cục
+  - Chuyển product card sang cấu trúc `card` có thể làm lộ default Bootstrap nếu CSS override không đủ chặt
+- Acceptance criteria:
+  - Home có Carousel Bootstrap hoạt động với indicator và control thật
+  - Shop có Offcanvas filter sidebar hoạt động và Toast Bootstrap cho quick add
+  - FAQ hiển thị bằng Accordion Bootstrap thay vì `details`
+  - Product cards ở Home và Shop dùng cấu trúc Bootstrap `card/card-body/card-footer`
+  - Các luồng Home -> Shop -> Product -> Cart -> Checkout vẫn không bị gãy
+  - Giao diện vẫn giữ ngôn ngữ thương hiệu hiện tại, không lộ Bootstrap mặc định
+- Manual verification steps:
+  1. Mở `index.html` và xác nhận carousel đổi slide bằng indicator và nút điều hướng.
+  2. Kiểm tra các product card ở Home và Shop, xác nhận chúng vẫn giữ layout premium nhưng markup đã dùng Bootstrap `card`.
+  3. Mở `cua-hang.html`, bấm nút mở bộ lọc và xác nhận offcanvas mở/đóng, filter vẫn hoạt động.
+  4. Thêm nhanh một sản phẩm từ Shop và xác nhận toast Bootstrap hiện đúng thông báo.
+  5. Mở `cau-hoi-thuong-gap.html` và xác nhận accordion mở/đóng từng câu hỏi ổn định.
+  6. Chạy `npm run build` và xác nhận không có lỗi bundling.
+- Status: done
+
+## Home Carousel Interaction Fix
+- Objective: Sửa lỗi Carousel trang chủ bị kẹt sau lần chuyển slide đầu tiên bằng cách đưa indicator/control về đúng data API chuẩn của Bootstrap, loại bỏ click-handler thủ công dễ gây xung đột với trạng thái nội bộ của component.
+- Files to create or modify:
+  - `docs/PLANS.md`
+  - `src/js/entries/home.js`
+  - `src/js/render/home-view.js`
+- Dependencies:
+  - `bootstrap` Carousel module đã được import qua Vite
+  - Home showcase carousel markup hiện tại
+- Risks:
+  - Nếu data attribute không khớp `id` của carousel, control và indicator sẽ ngừng hoạt động hoàn toàn
+  - Nếu vẫn giữ event handler thủ công song song với data API, lỗi cũ có thể tái diễn
+- Acceptance criteria:
+  - Carousel chuyển qua lại nhiều lần liên tiếp không bị treo
+  - Indicator luôn cập nhật đúng thẻ active sau mỗi lần chuyển
+  - Control prev/next và indicator đều bấm được liên tục
+  - Build chạy sạch
+- Manual verification steps:
+  1. Mở `index.html`, bấm next 3-4 lần liên tiếp và xác nhận carousel không treo.
+  2. Bấm prev/next xen kẽ và xác nhận indicator active đổi theo đúng slide.
+  3. Bấm trực tiếp từng indicator và xác nhận có thể chuyển qua lại nhiều lần.
+  4. Chạy `npm run build` và xác nhận không có lỗi bundling.
+- Status: done
+
 ## Status values
 - planned
 - in_progress

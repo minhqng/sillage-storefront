@@ -1,11 +1,33 @@
-function renderFaqItem(item) {
+function renderFaqItem(groupId, item, index) {
+  const itemId = `${groupId}-item-${index + 1}`;
+  const headingId = `${itemId}-heading`;
+  const collapseId = `${itemId}-collapse`;
+
   return `
-    <details class="sl-faq-item">
-      <summary>${item.question}</summary>
-      <div class="sl-faq-item__body">
-        <p class="sl-card-copy">${item.answer}</p>
+    <article class="accordion-item sl-faq-item">
+      <h3 class="accordion-header" id="${headingId}">
+        <button
+          class="accordion-button${index === 0 ? "" : " collapsed"}"
+          type="button"
+          aria-expanded="${index === 0 ? "true" : "false"}"
+          aria-controls="${collapseId}"
+          data-faq-toggle
+          data-bs-target="#${collapseId}"
+        >
+          ${item.question}
+        </button>
+      </h3>
+      <div
+        id="${collapseId}"
+        class="accordion-collapse collapse${index === 0 ? " show" : ""}"
+        aria-labelledby="${headingId}"
+        data-bs-parent="#faq-group-${groupId}"
+      >
+        <div class="accordion-body sl-faq-item__body">
+          <p class="sl-card-copy">${item.answer}</p>
+        </div>
       </div>
-    </details>
+    </article>
   `;
 }
 
@@ -16,8 +38,8 @@ function renderFaqGroup(group) {
         <p class="sl-label sl-muted">${group.eyebrow}</p>
         <h2>${group.title}</h2>
       </div>
-      <div class="sl-faq-group__items">
-        ${group.items.map((item) => renderFaqItem(item)).join("")}
+      <div class="accordion sl-faq-accordion sl-faq-group__items" id="faq-group-${group.id}">
+        ${group.items.map((item, index) => renderFaqItem(group.id, item, index)).join("")}
       </div>
     </section>
   `;

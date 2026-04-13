@@ -7,6 +7,56 @@ function formatOccasionLabel(occasion) {
   return formatTag(occasion);
 }
 
+function renderFilterControls({ familyOptions, occasionOptions, sortOptions }) {
+  return `
+    <form class="sl-shop-controls sl-shop-controls--panel" data-shop-form>
+      <div class="sl-shop-control">
+        <label class="form-label" for="shop-family">Nhóm hương</label>
+        <select class="form-select" id="shop-family" name="family" data-shop-family>
+          <option value="${ALL_FAMILIES}">Tất cả nhóm hương</option>
+          ${familyOptions
+            .map(
+              (option) => `
+                <option value="${option.value}">${option.label}</option>
+              `
+            )
+            .join("")}
+        </select>
+      </div>
+      <div class="sl-shop-control">
+        <label class="form-label" for="shop-sort">Sắp xếp</label>
+        <select class="form-select" id="shop-sort" name="sort" data-shop-sort>
+          ${sortOptions
+            .map(
+              (option) => `
+                <option value="${option.value}">${option.label}</option>
+              `
+            )
+            .join("")}
+        </select>
+      </div>
+      <div class="sl-shop-control">
+        <label class="form-label" for="shop-occasion">Dịp sử dụng</label>
+        <select class="form-select" id="shop-occasion" name="occasion" data-shop-occasion>
+          <option value="${ALL_OCCASIONS}">Tất cả dịp dùng</option>
+          ${occasionOptions
+            .map(
+              (option) => `
+                <option value="${option.value}">${option.label}</option>
+              `
+            )
+            .join("")}
+        </select>
+      </div>
+
+      <div class="sl-shop-filter-actions">
+        <button class="btn btn-secondary" type="button" data-clear-all-filters>Xóa tất cả</button>
+        <button class="btn btn-primary" type="button" data-shop-close-filters>Áp dụng lựa chọn</button>
+      </div>
+    </form>
+  `;
+}
+
 export function renderShopView({ familyOptions, occasionOptions, sortOptions }) {
   return `
     <section class="sl-section sl-section--compact sl-divider-top">
@@ -23,47 +73,14 @@ export function renderShopView({ familyOptions, occasionOptions, sortOptions }) 
               Muốn thử trên da trước? <a href="bo-kham-pha.html">Bắt đầu với Bộ Khám Phá</a>.
             </p>
           </div>
-
-          <form class="sl-shop-controls" data-shop-form>
-            <div class="sl-shop-control">
-              <label class="form-label" for="shop-family">Nhóm hương</label>
-              <select class="form-select" id="shop-family" name="family" data-shop-family>
-                <option value="${ALL_FAMILIES}">Tất cả nhóm hương</option>
-                ${familyOptions
-                  .map(
-                    (option) => `
-                      <option value="${option.value}">${option.label}</option>
-                    `
-                  )
-                  .join("")}
-              </select>
-            </div>
-            <div class="sl-shop-control">
-              <label class="form-label" for="shop-sort">Sắp xếp</label>
-              <select class="form-select" id="shop-sort" name="sort" data-shop-sort>
-                ${sortOptions
-                  .map(
-                    (option) => `
-                      <option value="${option.value}">${option.label}</option>
-                    `
-                  )
-                  .join("")}
-              </select>
-            </div>
-            <div class="sl-shop-control">
-              <label class="form-label" for="shop-occasion">Dịp sử dụng</label>
-              <select class="form-select" id="shop-occasion" name="occasion" data-shop-occasion>
-                <option value="${ALL_OCCASIONS}">Tất cả dịp dùng</option>
-                ${occasionOptions
-                  .map(
-                    (option) => `
-                      <option value="${option.value}">${option.label}</option>
-                    `
-                  )
-                  .join("")}
-              </select>
-            </div>
-          </form>
+          <div class="sl-shop-toolbar__actions">
+            <button class="btn btn-secondary sl-shop-filter-toggle" type="button" data-shop-open-filters>
+              Mở bộ lọc &amp; sắp xếp
+            </button>
+            <p class="sl-shop-toolbar__bootstrap-note">
+              Bộ lọc đang được đặt trong <strong>Bootstrap Offcanvas</strong> để trang cửa hàng thể hiện rõ sidebar trượt của framework.
+            </p>
+          </div>
         </div>
 
         <div class="sl-shop-status">
@@ -75,7 +92,38 @@ export function renderShopView({ familyOptions, occasionOptions, sortOptions }) 
           ${renderLoadingState()}
         </div>
 
-        <div class="sl-shop-toast" data-shop-toast role="status" aria-live="polite" hidden></div>
+        <div
+          class="offcanvas offcanvas-end sl-shop-offcanvas"
+          tabindex="-1"
+          id="sl-shop-filters"
+          aria-labelledby="sl-shop-filters-title"
+          data-shop-offcanvas
+        >
+          <div class="offcanvas-header sl-shop-offcanvas__header">
+            <div class="sl-stack sl-stack--tight">
+              <p class="sl-label sl-muted">Bootstrap Offcanvas</p>
+              <h2 class="offcanvas-title" id="sl-shop-filters-title">Lọc và sắp xếp bộ sưu tập</h2>
+            </div>
+            <button class="btn-close" type="button" aria-label="Đóng bộ lọc" data-shop-close-filters></button>
+          </div>
+          <div class="offcanvas-body sl-shop-offcanvas__body">
+            <p class="sl-card-copy">
+              Dùng sidebar này để đổi nhóm hương, dịp sử dụng và cách sắp xếp mà không phải rời khỏi trang sản phẩm.
+            </p>
+            ${renderFilterControls({ familyOptions, occasionOptions, sortOptions })}
+          </div>
+        </div>
+
+        <div class="toast-container sl-shop-toast-container">
+          <div class="toast sl-shop-toast border-0" role="status" aria-live="polite" aria-atomic="true" data-shop-toast>
+            <div class="toast-header sl-shop-toast__header">
+              <strong class="me-auto">Giỏ hàng</strong>
+              <small>Bootstrap Toast</small>
+              <button class="btn-close" type="button" aria-label="Đóng thông báo" data-shop-toast-close></button>
+            </div>
+            <div class="toast-body sl-shop-toast__body" data-shop-toast-body></div>
+          </div>
+        </div>
       </div>
     </section>
   `;
