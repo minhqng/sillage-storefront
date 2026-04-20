@@ -89,6 +89,43 @@
   4. Chạy `npm run build` và xác nhận không có lỗi bundling.
 - Status: done
 
+## Bootstrap Presentation Master Document
+- Objective: Kiểm kê đầy đủ mọi dấu vết Bootstrap trong codebase thực tế, rồi biên soạn một tài liệu markdown tiếng Việt dùng được trực tiếp cho học tập, demo và bảo vệ đồ án, theo luồng tuần tự từ tích hợp nền tảng đến từng điểm sử dụng cụ thể trên website.
+- Files to create or modify:
+  - `docs/PLANS.md`
+  - `docs/BOOTSTRAP_PRESENTATION_MASTER.md`
+- Dependencies:
+  - `AGENTS.md`
+  - `docs/PROJECT_BRIEF.md`
+  - `docs/DESIGN_SYSTEM.md`
+  - `package.json`
+  - Root HTML entry pages
+  - `src/styles/main.css`
+  - `src/styles/bootstrap-overrides.css`
+  - `src/styles/tokens.css`
+  - `src/styles/utilities.css`
+  - `src/styles/components/*`
+  - `src/js/core/*`
+  - `src/js/entries/*`
+  - `src/js/render/*`
+- Risks:
+  - Dễ nhầm class custom của project với class Bootstrap thật nếu không tách rõ từng lớp trách nhiệm
+  - Dễ bỏ sót các file chỉ dùng Bootstrap gián tiếp qua renderer, shared shell, hoặc CSS override
+  - Dễ viết trôi sang tutorial chung chung thay vì bám source code thật của repo
+  - Có một số dấu vết Bootstrap chỉ tồn tại ở override layer chuẩn bị cho tương lai, nhưng không có runtime markup/JS tương ứng; cần phân biệt rõ để tránh gán ghép
+- Acceptance criteria:
+  - Tài liệu có inventory Bootstrap toàn repo với file path cụ thể
+  - Tài liệu giải thích đúng luồng `HTML -> CSS main -> overrides -> entry module -> render module -> Bootstrap JS/custom JS`
+  - Mỗi component Bootstrap thực sự được dùng đều có phần lý thuyết, snippet, file path, cách custom và ý nghĩa UX
+  - Tài liệu nêu rõ phần nào là Bootstrap gốc, phần nào là custom design system, và thành phần nào không được dùng trong runtime hiện tại
+  - Tài liệu có thể dùng trực tiếp để thuyết trình/bảo vệ bằng tiếng Việt
+- Manual verification steps:
+  1. Đối chiếu inventory trong tài liệu với `rg` trên các từ khóa `bootstrap`, `data-bs-`, `--bs-`, `carousel`, `offcanvas`, `toast`, `accordion`, `collapse`, `card`, `btn`, `form-`.
+  2. Kiểm tra tài liệu có đủ 8 phần theo yêu cầu: mở đầu, inventory, flow kể chuyện, slide-by-slide, phân tích chuyên sâu, demo walkthrough, Q&A, kết luận.
+  3. Kiểm tra mọi nhận định quan trọng đều gắn với file path và snippet từ source.
+  4. Kiểm tra mục “không dùng” không gán nhầm component chỉ mới được override CSS mà chưa có runtime usage.
+- Status: done
+
 ## Status values
 - planned
 - in_progress
